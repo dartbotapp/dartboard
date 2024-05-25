@@ -1,2 +1,2 @@
-# dartboard
+# Dartbot Dartboard
 Dartboard web component
