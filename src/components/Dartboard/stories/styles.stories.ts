@@ -72,7 +72,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<DartboardProps>;
 
-export const ColorPallets: Story = {
+export const Default: Story = {
   name: "color-pallets",
   tags: ["hidden"],
   render: () => `<dartbot-dartboard></dartbot-dartboard>`,
@@ -89,28 +89,8 @@ export const Colors: Story = {
     <style>
       #${name} {
         flex-flow: row wrap;
-
         dartbot-dartboard {
           width: 33%;
-
-
-          animation-duration: infinite;
-          animation-name: slidein;
-          animation-iteration-count: 3;
-          animation-direction: alternate;
-
-
-          @keyframes slidein {
-            from {
-              margin-left: 100%;
-              width: 300%;
-            }
-
-            to {
-              margin-left: 0%;
-              width: 100%;
-            }
-          }
         }
         dartbot-dartboard:nth-child(1) {
           --dartbot-board-bg: #283618;

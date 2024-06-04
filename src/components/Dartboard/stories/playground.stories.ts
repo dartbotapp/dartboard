@@ -17,7 +17,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<DartboardProps>;
 
-export const Options: Story = {
+export const Playground: Story = {
   name: 'Playground',
   args: {
     [Token.boardBg] : baseTokens[Token.boardBg],
@@ -67,28 +67,30 @@ export const Options: Story = {
   },
   render: (params) => {
     const style = `
-      dartbot-dartboard {
-        ${Token.boardBg}: ${params[Token.boardBg]};
-        ${Token.sectorBg1}: ${params[Token.sectorBg1]};
-        ${Token.sectorBg2}: ${params[Token.sectorBg2]};
-        ${Token.sectorBg3}: ${params[Token.sectorBg3]};
-        ${Token.sectorBg4}: ${params[Token.sectorBg4]};
-        ${Token.wireShow}: ${params[Token.wireShow] ? '1' : '0'};
-        ${Token.wireColor}: ${params[Token.wireColor]};
-        ${Token.wireWidth}: ${params[Token.wireWidth]};
-        ${Token.wireShadowShow}: ${params[Token.wireShadowShow] ? '1' : '0'};
-        ${Token.wireShadowColor}: ${params[Token.wireShadowColor]};
-        ${Token.wireShadowBlur}: ${params[Token.wireShadowBlur]};
-        ${Token.wireShadowOffsetX}: ${params[Token.wireShadowOffsetX]};
-        ${Token.wireShadowOffsetY}: ${params[Token.wireShadowOffsetY]};
-        ${Token.wireRingOffset}: ${params[Token.wireRingOffset]};
-        ${Token.numberShow}: ${params[Token.numberShow] ? '1' : '0'};
-        ${Token.numberColor}: ${params[Token.numberColor]};
-        ${Token.numberWidth}: ${params[Token.numberWidth]};
-        ${Token.numberInset}: ${params[Token.numberInset]};
-        ${Token.numberWireShow}: ${params[Token.numberWireShow] ? '1' : '0'};
-        ${Token.numberWireColor}: ${params[Token.numberWireColor]};
-        ${Token.numberWireWidth}: ${params[Token.numberWireWidth]};
+      .story-playground {
+        dartbot-dartboard
+          ${Token.boardBg}: ${params[Token.boardBg]};
+          ${Token.sectorBg1}: ${params[Token.sectorBg1]};
+          ${Token.sectorBg2}: ${params[Token.sectorBg2]};
+          ${Token.sectorBg3}: ${params[Token.sectorBg3]};
+          ${Token.sectorBg4}: ${params[Token.sectorBg4]};
+          ${Token.wireShow}: ${params[Token.wireShow] ? '1' : '0'};
+          ${Token.wireColor}: ${params[Token.wireColor]};
+          ${Token.wireWidth}: ${params[Token.wireWidth]};
+          ${Token.wireShadowShow}: ${params[Token.wireShadowShow] ? '1' : '0'};
+          ${Token.wireShadowColor}: ${params[Token.wireShadowColor]};
+          ${Token.wireShadowBlur}: ${params[Token.wireShadowBlur]};
+          ${Token.wireShadowOffsetX}: ${params[Token.wireShadowOffsetX]};
+          ${Token.wireShadowOffsetY}: ${params[Token.wireShadowOffsetY]};
+          ${Token.wireRingOffset}: ${params[Token.wireRingOffset]};
+          ${Token.numberShow}: ${params[Token.numberShow] ? '1' : '0'};
+          ${Token.numberColor}: ${params[Token.numberColor]};
+          ${Token.numberWidth}: ${params[Token.numberWidth]};
+          ${Token.numberInset}: ${params[Token.numberInset]};
+          ${Token.numberWireShow}: ${params[Token.numberWireShow] ? '1' : '0'};
+          ${Token.numberWireColor}: ${params[Token.numberWireColor]};
+          ${Token.numberWireWidth}: ${params[Token.numberWireWidth]};
+        }
       }
     `;
     const template = `
@@ -102,7 +104,7 @@ export const Options: Story = {
         }
       </style>
       <style>${style}</style>
-      <div class="story-options">
+      <div class="story-playground">
         <dartbot-dartboard></dartbot-dartboard>
       </div>
     `;

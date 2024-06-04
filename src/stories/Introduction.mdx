@@ -1,0 +1,73 @@
+import { Meta, Title, Subtitle, Subheading } from '@storybook/blocks';
+import '../components/Dartboard/dartbot-dartboard';
+
+<Meta title="Introduction" name="ToC" />
+
+<Title>Introduction</Title>
+<Subtitle>A vanilla web component that renders an interactive, fully customizable dartboard</Subtitle>
+<br />
+<dartbot-dartboard></dartbot-dartboard>
+
+### Installation
+```bash
+npm install @dartbot/dartboard
+```
+```html
+<html>
+  <head>
+    <script type="module" src="[node_modules]/@dartbot/dartboard/index.js"></script>
+  </head>
+  <body>
+    <dartbot-dartboard></dartbot-dart-board>
+  </body>
+</html>
+```
+
+## Design Goals
+
+<dl>
+  <dt>HTML Canvas</dt>
+  <dd>Render using HTMLCanvas</dd>
+  <dt>Vanilla Web Component</dt>
+  <dd>Export as a vanilla web component with no dependencies, or framworks required</dd>
+  <dt>Typescript</dt>
+  <dd>Written in Typescript</dd>
+  <dt>Styles</dt>
+  <dd>Fully customizable styling. Where possible use CSS to control styling</dd>
+  <dt>Support CSS props</dt>
+  <dd>Support standard CSS props (padding, margin, filters, transformation, ...)</dd>
+  <dt>Accessibility</dt>
+  <dd>Implement accessibility recommendations</dd>
+  <dt>Interactivity</dt>
+  <dd>Support for touch input, hover, select, highlight, click</dd>
+  <dt>Events</dt>
+  <dd>Dispatch events for user interaction</dd>
+  <dt>Web component standards</dt>
+  <dd>Utilize W3C standard features (attributes, inputs, events, observers)</dd>
+</dl>
+
+# Features
+* Styles
+  * Customize styles via CSS
+    * Show wire
+    * Wire shadow
+    * Wire blur
+    * Wire offset
+    * Wire overhang
+    * Wire inset
+    * Show numbers
+  * Support standard CSS props
+    * padding
+    * margin
+    * filters
+    * transformations
+    * zoom
+  * Auto resize
+* Hits
+  * Hits
+  * multiple styles
+* Alt board setups
+* Resize
+* Events
+* Pan and Zoom
+  on mouse

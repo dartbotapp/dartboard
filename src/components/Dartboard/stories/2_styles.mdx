@@ -1,20 +1,20 @@
 import { Meta, Canvas, Title, Subtitle, Unstyled } from '@storybook/blocks';
 import { Token, baseTokens } from '../theme';
-import * as ThemeStories from './1_styles.stories';
+import * as ThemeStories from './styles.stories';
 
 export const colorSample = (c) =>
   (<div className="color-sample" style={{ backgroundColor: c  }}></div>);
 export const token = (t) =>
   (<code>{t}</code>);
 
-<Meta title="Components/Dartboard" name="Themes" />
+<Meta title="Components/Dartboard" name="Styles" />
 
-<Title>Themes</Title>
+<Title>Styles</Title>
 <Subtitle>Customize the rendering of the dartboard</Subtitle>
 <br /><br />
 
 ### A default dartboard, in all it's glory
-<Canvas of={ThemeStories.ColorPallets} />
+<Canvas of={ThemeStories.Default} />
 
 ### Try different color pallets
 <Canvas of={ThemeStories.Colors} />

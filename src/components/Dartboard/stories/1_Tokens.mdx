@@ -4,7 +4,6 @@ import { Token, baseTokens } from '../theme';
 export const colorSample = (c) =>
   (<div className="color-sample" style={{ backgroundColor: c  }}></div>);
 
-
 <Meta title="Components/Dartboard" name="Design Tokens" />
 
 <style>
@@ -190,9 +189,13 @@ export const colorSample = (c) =>
 > Toggle features on and off by setting a value to <code>1</code> or <code>0</code>
 
 <br />
-## Apply using CSS Variables
+# Usage
 
-Design tokens are applied to the component using CSS variables. Here is an example of how to apply the settings to a dartboard:
+Design tokens are applied to the component using CSS variables. Set the
+variables for the element or scope you want the styles to apply to
+using standard CSS selectors.
+
+Here is an example of how to apply the design tokens for all dartboards on a page.
 ```css
 dartbot-dartboard {
   --dartbot-board-bg: #283618;
