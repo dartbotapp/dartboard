@@ -1,4 +1,5 @@
 export const enum Token {
+  canvasBg = '--dartbot-canvas-bg',
   boardBg = '--dartbot-board-bg',
   sectorBg1 = '--dartbot-sector-bg-1',
   sectorBg2 = '--dartbot-sector-bg-2',
@@ -28,6 +29,7 @@ export const enum Token {
 }
 
 export interface Theme {
+  canvasBackground: string;
   boardBackground: string;
   sectorColor: string[][];
   wireShow: boolean,

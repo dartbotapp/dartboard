@@ -5,6 +5,7 @@ type BaseTokens = {
 };
 
 export const baseTokens: BaseTokens = {
+  [Token.canvasBg]: 'transparent',
   [Token.boardBg]: '#080808',
   [Token.sectorBg1]: 'rgba(10, 10, 10, 1)',
   [Token.sectorBg2]: 'rgba(255, 250, 231, 1)',
@@ -47,6 +48,7 @@ const createThemeBuilder = (
   const b = (token: Token) => s(token) === '1';
 
   return {
+    canvasBackground: s(Token.canvasBg),
     boardBackground: s(Token.boardBg),
     sectorColor: [
       [s(Token.sectorBg1), s(Token.sectorBg2)],

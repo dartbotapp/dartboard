@@ -1,6 +1,6 @@
 import { clearBoard, drawBoard, drawHits, setContext } from './draw-board';
 import { translateCoords, debounce, PolarPoint, Point, getPolar, Board } from './utils';
-import { themeBuilder } from './theme';
+import { Token, baseTokens, themeBuilder } from './theme';
 
 const RESIZE_DEBOUNCE_MS = 100;
 const DEFAULT_ZOOM = 0;
@@ -78,7 +78,10 @@ export class Dartboard extends HTMLElement {
         aspect-ratio: 1 / 1;
         box-sizing: border-box;
       }
-      canvas { position: absolute; }
+      canvas {
+        position: absolute;
+        background: var(${Token.canvasBg}, ${baseTokens[Token.canvasBg]});
+      }
       </style>
       <canvas></canvas>
     `;

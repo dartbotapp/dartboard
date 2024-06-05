@@ -1,72 +1,15 @@
-import type { StoryObj, Meta, Decorator } from "@storybook/html";
+import type { StoryObj, Meta } from "@storybook/html";
 import "../dartbot-dartboard";
-
-const transform = (source: string, story: any) => {
-  console.log(`transforming ${story.name}`);
-  const doc = new DOMParser().parseFromString(`<div id="dartbot-transform">${source}</div>`, 'text/html');
-  const remove = doc.querySelectorAll('[data-dartbot-remove]');
-  remove.forEach((el) => el.remove());
-  const content = doc.querySelector('#dartbot-transform');
-  return content?.innerHTML || source;
-};
-
-const baseDecorator: Decorator = (story, context) => {
-  console.log(`base decorating ${context.name}`);
-  const { parameters } = context;
-  const { aspectRatio } = parameters;
-  const content = story() as string;
-  const storyIdInner = `story--${context.id}-inner > div`;
-  const doc = new DOMParser().parseFromString(content, 'text/html');
-  const divs = doc.querySelectorAll(':scope > div');
-  divs.forEach((div) => {
-    div.classList.add(storyIdInner);
-  });
-  const out = content;
-  return `
-<style data-dartbot-remove>
-  #${storyIdInner} {
-    display: flex;
-    dartbot-dartboard {
-      padding-left: .5em;
-      padding-right: .5em;
-      ${aspectRatio ? `aspect-ratio: ${aspectRatio};` : ''}
-    }
-  }
-</style>
-${out}
-`;
-};
-
-const zoomDecorator: Decorator = (story, context) => {
-  console.log(`zoom decorating ${context.name}`);
-  const { parameters, name } = context;
-  const { zoom, center } = parameters;
-  return `
-<script data-dartbot-remove>
-  console.log('zoom attach');
-  document.addEventListener('DOMContentLoaded', () => {
-    const selector = '[data-name="${name}"] dartbot-dartboard';
-    const boards = document.querySelectorAll(selector);
-    boards?.forEach((board) => {
-      console.log('setting zoom and center');
-      board.zoom = ${zoom};
-      board.centerPoint = ${center};
-    });
-  });
-</script>
-${story()}
-`
-};
+import { baseDecorator, transform, zoomDecorator } from '../../../stories/decorators';
 
 export type DartboardProps = {};
 
 const meta = {
   title: "Components/Dartboard",
-  render: () => {
-    return `<dartbot-dartboard></dartbot-dartboard>`;
-  },
-  argTypes: {},
-  args: {},
+  decorators: [zoomDecorator, baseDecorator],
+  parameters: {
+    docs: { source: { transform } }
+  }
 } satisfies Meta<DartboardProps>;
 
 export default meta;
@@ -81,10 +24,6 @@ export const Default: Story = {
 export const Colors: Story = {
   name: "colors",
   tags: ["hidden"],
-  parameters: {
-    docs: { source: { transform } }
-  },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
     <style>
       #${name} {
@@ -169,10 +108,6 @@ export const Colors: Story = {
 export const WireWidth: Story = {
   name: "wire-width",
   tags: ["hidden"],
-  parameters: {
-    docs: { source: { transform } }
-  },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
 <style>
   #${name} {
@@ -200,10 +135,8 @@ export const WireShadowBlur: Story = {
   tags: ["hidden"],
   parameters: {
     aspectRatio: "16/9",
-    zoom: 6,
-    docs: { source: { transform } }
+    zoom: 6
   },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
 <style>
   #${name} {
@@ -232,9 +165,7 @@ export const WireShadowOffset: Story = {
   parameters: {
     aspectRatio: "16/9",
     zoom: 6,
-    docs: { source: { transform } }
   },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
 <style>
   #${name} {
@@ -266,10 +197,8 @@ export const WireRingOffset: Story = {
   parameters: {
     aspectRatio: "16/9",
     zoom: 3,
-    center: "{ radius: 170, angle: 0.157 }",
-    docs: { source: { transform } }
+    center: "{ radius: 170, angle: 0.157 }"
   },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
 <style>
   #${name} {
@@ -296,10 +225,8 @@ export const NumberShow: Story = {
   name: "numbers-show",
   tags: ["hidden"],
   parameters: {
-    aspectRatio: "1/1",
-    docs: { source: { transform } }
+    aspectRatio: "1/1"
   },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
 <style>
   #${name} {
@@ -331,10 +258,8 @@ export const NumberInset: Story = {
   parameters: {
     aspectRatio: "16/9",
     zoom: 3,
-    center: "{ radius: 170, angle: 0.157 }",
-    docs: { source: { transform } },
+    center: "{ radius: 170, angle: 0.157 }"
   },
-  decorators: [zoomDecorator, baseDecorator],
   render: (_, {name}) => `
 <style>
   #${name} {

@@ -8,7 +8,7 @@ export const drawWire = (
   theme: Theme,
   context: CanvasRenderingContext2D
 ) => {
-    if (!theme.wireShow) { return; }
+  if (theme.wireShow) {
     context.save();
     context.strokeStyle = theme.wireColor;
     context.lineWidth = theme.wireWidth;
@@ -51,6 +51,8 @@ export const drawWire = (
       context.arc(0, 0, board.rings[r] + (theme.wireWidth / 2), 0, PI2, false);
       context.stroke();
     }
+    context.restore();
+  }
 
   // Number wire
   if (theme.numberShow && theme.numberWireShow) {
@@ -63,5 +65,4 @@ export const drawWire = (
     context.stroke();
     context.restore();
   }
-    context.restore();
 };
