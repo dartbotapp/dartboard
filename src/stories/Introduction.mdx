@@ -6,7 +6,7 @@ import '../components/Dartboard/dartbot-dartboard';
 <Title>Introduction</Title>
 <Subtitle>A vanilla web component that renders an interactive, fully customizable dartboard</Subtitle>
 <br />
-<dartbot-dartboard></dartbot-dartboard>
+<dartbot-dartboard style={{ 'max-height': '40em' }}></dartbot-dartboard>
 
 ### Installation
 ```bash
@@ -29,21 +29,19 @@ npm install @dartbot/dartboard
   <dt>HTML Canvas</dt>
   <dd>Render using HTMLCanvas</dd>
   <dt>Vanilla Web Component</dt>
-  <dd>Export as a vanilla web component with no dependencies, or framworks required</dd>
+  <dd>Export as a dependency-free vanilla web component, usable with just HTML, CSS, and JS</dd>
   <dt>Typescript</dt>
   <dd>Written in Typescript</dd>
   <dt>Styles</dt>
-  <dd>Fully customizable styling. Where possible use CSS to control styling</dd>
+  <dd>Offer fully customizable styling. Where possible use CSS to control customized settings</dd>
+  <dt>Pan & Zoom</dt>
+  <dd>Support ability to zoom in and change center point of the board</dd>
   <dt>Support CSS props</dt>
-  <dd>Support standard CSS props (padding, margin, filters, transformation, ...)</dd>
+  <dd>CSS properties like padding, margin, filters, etc., should affect the element as expected</dd>
   <dt>Accessibility</dt>
-  <dd>Implement accessibility recommendations</dd>
+  <dd>Implement accessibility recommendations. WCAG, WAI-ARIA</dd>
   <dt>Interactivity</dt>
-  <dd>Support for touch input, hover, select, highlight, click</dd>
-  <dt>Events</dt>
-  <dd>Dispatch events for user interaction</dd>
-  <dt>Web component standards</dt>
-  <dd>Utilize W3C standard features (attributes, inputs, events, observers)</dd>
+  <dd>Support user interactivity features including touch input, hover, selection, highlighting, and clicking.</dd>
 </dl>
 
 # Features
