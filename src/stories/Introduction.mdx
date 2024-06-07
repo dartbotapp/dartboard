@@ -5,23 +5,7 @@ import '../components/Dartboard/dartbot-dartboard';
 
 <Title>Introduction</Title>
 <Subtitle>A vanilla web component that renders an interactive, fully customizable dartboard</Subtitle>
-<br />
-<dartbot-dartboard style={{ 'max-height': '40em' }}></dartbot-dartboard>
 
-### Installation
-```bash
-npm install @dartbot/dartboard
-```
-```html
-<html>
-  <head>
-    <script type="module" src="[node_modules]/@dartbot/dartboard/index.js"></script>
-  </head>
-  <body>
-    <dartbot-dartboard></dartbot-dart-board>
-  </body>
-</html>
-```
 
 ## Design Goals
 
@@ -60,14 +44,37 @@ npm install @dartbot/dartboard
     * ✔️ filters
     * ✔️ transformations
     * ✔️ zoom
-  * Auto resize
+  * ✅ Resize
 * Hits
   * Hits
   * multiple styles
 * Alt board setups
-* Resize
 * Events
+  * hover
+  * click
+  * select
+  * drag
+  * touch
 * Pan and Zoom
-  on mouse
+  * props
+  * mouse
 * npm build and publish
 * build badges
+* Rotate board to match pi
+
+<dartbot-dartboard style={{ 'max-height': '40em' }}></dartbot-dartboard>
+
+### Installation
+```bash
+npm install @dartbot/dartboard
+```
+```html
+<html>
+  <head>
+    <script type="module" src="[node_modules]/@dartbot/dartboard/index.js"></script>
+  </head>
+  <body>
+    <dartbot-dartboard></dartbot-dart-board>
+  </body>
+</html>
+```

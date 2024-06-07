@@ -120,42 +120,6 @@ export const Border: Story = {
   `,
 };
 
-export const Width: Story = {
-  name: "story-width",
-  tags: ["hidden"],
-  render: (_, {name}) => `
-    <style data-dartbot-remove>
-      #${name} {
-        column-gap: .25em;
-        dartbot-dartboard {
-          border: .1em dashed #5500b852;
-        }
-      }
-    </style>
-    <style>
-      #${name} {
-        dartbot-dartboard:nth-child(1) {
-          width: 12em;
-          height: 7em;
-        }
-        dartbot-dartboard:nth-child(2) {
-          width: 16em;
-          height: 5em;
-        }
-        dartbot-dartboard:nth-child(3) {
-          width: 4em;
-          height: 10em;
-        }
-      }
-    </style>
-    <div id="${name}">
-      <dartbot-dartboard></dartbot-dartboard>
-      <dartbot-dartboard></dartbot-dartboard>
-      <dartbot-dartboard></dartbot-dartboard>
-    </div>
-  `,
-};
-
 export const Filters: Story = {
   name: "story-filters",
   tags: ["hidden"],

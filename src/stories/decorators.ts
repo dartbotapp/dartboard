@@ -15,9 +15,11 @@ export const baseDecorator: Decorator = (story, context) => {
 <style data-dartbot-remove>
   #${context.name} {
     display: flex;
+    column-gap: .25em;
+    row-gap: .25em;
+    align-items: flex-start;
+
     dartbot-dartboard {
-      padding-left: .5em;
-      padding-right: .5em;
       ${aspectRatio ? `aspect-ratio: ${aspectRatio};` : ''}
     }
   }
