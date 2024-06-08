@@ -20,7 +20,6 @@ export const Dimensions: Story = {
   render: (_, {name}) => `
 <style data-dartbot-remove>
   #${name} {
-    column-gap: .25em;
     dartbot-dartboard {
       border: .1em dashed #0002;
     }

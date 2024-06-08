@@ -1,0 +1,46 @@
+import { Meta, Canvas, Title, Subtitle } from '@storybook/blocks';
+import * as BoardStories from './board.stories';
+
+<Meta title="Components/Dartboard" name="Board" />
+
+<Title>Configure the Board</Title>
+<Subtitle>Edit the board's layout by changing the configuration of rings and sectors</Subtitle>
+
+```typescript
+interface Board {
+  radius: number;
+  rings: number[];
+  sectors: number[];
+}
+```
+
+```javascript
+const board = document.createElement('dartbot-dartboard');
+
+// Dartboards have a radius of 225 millimeters
+board.radius = 225;
+
+// Dartboards have 20 sectors
+board.sectors = [
+  20, 1, 18, 4, 13, 6, 10, 15, 2, 17,
+  3, 19, 7, 16, 8, 11, 14, 9, 12, 5
+]
+
+// 6 rings make up the bullseye, single, double, and treble
+board.rings = [
+  6.35,  // Double Bull
+  16,    // Single Bull
+  99,    // Skinny Single
+  107,   // Treble
+  162,   // Fat Single
+  170,   // Double and edge of score-able area
+],
+```
+
+### Rings
+Change the width of the rings or add or remove them.
+<Canvas of={BoardStories.Rings} />
+
+### Sectors
+Change the number of sectors or their point values
+<Canvas of={BoardStories.Sectors} />

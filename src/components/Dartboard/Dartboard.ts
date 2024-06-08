@@ -17,6 +17,14 @@ export class Dartboard extends HTMLElement {
   #board: Board.Board;
   debounceRender: any;
 
+  get board(): Board.Board {
+    return this.#board;
+  }
+  set board(value: Board.Board) {
+    this.#board = value;
+    this.#render();
+  }
+
   get zoom(): number {
     return this.#zoom;
   }
