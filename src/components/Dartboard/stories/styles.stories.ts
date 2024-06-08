@@ -285,6 +285,8 @@ export const NumberInset: Story = {
 export const ColorWall: StoryObj = {
   name: "Color Wall",
   args: {
+    width: 16,
+    height: 12,
     color1: '#00f',
     color2: '#f0b',
     color3: '#0fd'
@@ -294,14 +296,14 @@ export const ColorWall: StoryObj = {
     color2: { control: 'color' },
     color3: { control: 'color' },
   },
-  render: ({ color1, color2, color3 }, {id}) => `
+  render: ({ color1, color2, color3, width, height }, {id}) => `
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const interp = (c1, c2, percent) => c1 + percent * (c2 - c1);
     const container = document.getElementById('${id}');
     if (container === null) return;
     container.replaceChildren();
-    const grid = { width: 16, height: 12 };
+    const grid = { width: ${width}, height: ${height} };
     const boards = [...new Array(grid.width * grid.height)]
       .map(() => document.createElement('dartbot-dartboard'));
     const max = Math.sqrt(grid.width ** 2 + grid.height ** 2);
@@ -335,7 +337,7 @@ export const ColorWall: StoryObj = {
 <style data-dartbot-remove>
   #${id} {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
+    grid-template-columns: repeat(${width}, 1fr);
     grid-column-gap: .1em;
     --dartbot-number-show: 0;
     --dartbot-wire-show: 0;

@@ -16,6 +16,7 @@ type Story = StoryObj;
 
 export const Rings: Story = {
   name: "story-rings",
+  tags: ["hidden"],
   render: (_, {name}) => `
 <script>
   (() => {
@@ -41,6 +42,7 @@ export const Rings: Story = {
 
 export const Sectors: Story = {
   name: "story-sectors",
+  tags: ["hidden"],
   render: (_, {name}) => `
 <script>
   (() => {
