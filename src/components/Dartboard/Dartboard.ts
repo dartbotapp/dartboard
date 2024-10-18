@@ -121,10 +121,9 @@ export class Dartboard extends HTMLElement {
     const content = this.#template.content.cloneNode(true);
     this.#shadow.appendChild(content);
     this.#canvas = this.#shadow.querySelector('canvas')!;
-    this.#canvas.addEventListener('click', (e) => {
+    this.#canvas.addEventListener('click', () => {
       this.#render();
     });
-    // this.#render();
   }
 
   renderCallback() {
@@ -202,3 +201,5 @@ export interface PointInfo {
   point: Point;
   polar: PolarPoint;
 }
+
+window.customElements.define('dartbot-dartboard', Dartboard);

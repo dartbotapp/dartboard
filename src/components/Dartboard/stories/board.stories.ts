@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/html';
-import '../dartbot-dartboard';
+import '../Dartboard';
 import { baseDecorator, themeDecorator, transform } from '../../../stories/decorators';
 
 const meta = {

@@ -2,7 +2,7 @@ import type { StorybookConfig } from "@storybook/html-vite";
 import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
-
+  staticDirs: ['../storybook-public'],
   tags: {
     hidden: {  excludeFromSidebar: true,  excludeFromDocsStories: true },
   },
@@ -54,7 +54,6 @@ addons.setConfig({
   sidebar: {
     filters: {
       patterns: (item) => {
-
         console.log('hidden');
         return !item?.tags?.includes('hidden');
       }

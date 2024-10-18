@@ -29,8 +29,8 @@ ${out}
 };
 
 export const themeDecorator: Decorator = (story, context) => {
-  const { parameters } = context;
-  const { theme } = parameters;
+  // const { parameters } = context;
+  // const { theme } = parameters;
   return `
 <style data-dartbot-remove>
   #${context.name} {

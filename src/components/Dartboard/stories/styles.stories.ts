@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from "@storybook/html";
-import "../dartbot-dartboard";
+import "../Dartboard";
 import { baseDecorator, transform, zoomDecorator } from '../../../stories/decorators';
 
 export type DartboardProps = {};

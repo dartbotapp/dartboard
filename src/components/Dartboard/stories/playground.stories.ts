@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/html';
-import '../dartbot-dartboard';
+import '../Dartboard';
 import { baseTokens, Token } from '../theme';
 
 export type DartboardProps = {
