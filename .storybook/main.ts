@@ -8,7 +8,7 @@ const config: StorybookConfig = {
   },
 
   stories: [
-    "../src/components/Dartboard/stories/Tokens.mdx'",
+    "../src/stories",
     "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],

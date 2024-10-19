@@ -1,5 +1,5 @@
 {
-  "name": "@dartbot/ui",
+  "name": "@dartbot/components",
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -10,10 +10,11 @@
   "files": ["dist"],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build:npm && npm run build:storybook",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build:npm": "tsc && vite build",
+    "build:storybook": "storybook build"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.4.0",
