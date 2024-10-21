@@ -1,22 +1,23 @@
-import type { StorybookConfig } from "@storybook/html-vite";
+import type { StorybookConfig } from '@storybook/html-vite';
 import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
   staticDirs: ['../storybook-public'],
   tags: {
-    hidden: {  excludeFromSidebar: true,  excludeFromDocsStories: true },
+    hidden: {
+      excludeFromSidebar: true,
+      excludeFromDocsStories: true,
+    },
   },
-
   stories: [
-    "../src/stories",
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    '../stories/**/*.mdx',
+    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@chromatic-com/storybook',
+    '@storybook/addon-interactions',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -28,21 +29,21 @@ const config: StorybookConfig = {
       },
     },
     {
-      name: "@storybook/manager-api",
+      name: '@storybook/manager-api',
       options: {
         sidebar: {
           filters: {
-            patterns: (item) => {
+            patterns: item => {
               console.log('hidden');
               return !item?.tags?.includes('hidden');
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   ],
   framework: {
-    name: "@storybook/html-vite",
+    name: '@storybook/html-vite',
     options: {},
   },
 };
@@ -53,10 +54,10 @@ import { addons } from '@storybook/manager-api';
 addons.setConfig({
   sidebar: {
     filters: {
-      patterns: (item) => {
+      patterns: item => {
         console.log('hidden');
         return !item?.tags?.includes('hidden');
-      }
-    }
-  }
+      },
+    },
+  },
 });

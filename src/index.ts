@@ -1,1 +1,1 @@
-export * from './components';
+export { Dartboard } from './Dartboard.js';

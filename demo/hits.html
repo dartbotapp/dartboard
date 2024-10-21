@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script type="module" async>
+    import '../dist/lib/dartbot-dartboard.js';
+
+    // Create the dartboard
+    const root = document.getElementById('demo');
+    const dartboard = document.createElement('dartbot-dartboard');
+    root.appendChild(dartboard);
+
+    // Add a hit everytime the board is clicked
+    dartboard.addEventListener('click', (event) => {
+      const board = event.currentTarget;
+      const { offsetX, offsetY } = event;
+      const point = board.translatePoint(offsetX, offsetY);
+      const { radius, angle } = point.polar;
+      const hit = { radius, angle };
+      board.hits = [...board.hits, hit];
+    });
+  </script>
+</body>
+</html>

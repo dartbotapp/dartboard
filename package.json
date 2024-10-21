@@ -1,37 +1,93 @@
 {
-  "name": "@dartbot/components",
+  "name": "@dartbot/dartboard",
+  "description": "Dartboard implemented as a vanilla web component",
+  "license": "MIT",
+  "author": "Stephen Marsh",
   "version": "0.1.0",
   "type": "module",
-  "exports": {
-    ".": "./dist/main.js",
-    "./dartboard": "./dist/dartboard.js"
-  },
-  "types": "./dist/main.d.ts",
   "files": ["dist"],
+  "main": "dist/lib/index.js",
+  "module": "dist/src/index.js",
+  "exports": {
+    ".": "./dist/lib/index.js",
+    "./dartboard.js": "./dist/lib/dartbot-dartboard.js"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "npm run build:npm && npm run build:storybook",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build:npm": "tsc && vite build",
-    "build:storybook": "storybook build"
+    "analyze": "cem analyze --outdir dist",
+    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"web-dev-server\"",
+    "build": "tsc && npm run analyze -- --exclude dist",
+    "prepublish": "tsc && npm run analyze -- --exclude dist",
+    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "prepare": "husky",
+    "test": "tsc && wtr --coverage",
+    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
+    "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"storybook dev -p 8080\"",
+    "storybook:build": "tsc && npm run analyze -- --exclude dist && storybook build"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.4.0",
-    "@storybook/addon-essentials": "^8.2.0-alpha.2",
-    "@storybook/addon-interactions": "^8.2.0-alpha.2",
-    "@storybook/addon-links": "^8.2.0-alpha.2",
-    "@storybook/blocks": "^8.2.0-alpha.2",
-    "@storybook/html": "^8.2.0-alpha.2",
-    "@storybook/html-vite": "^8.2.0-alpha.2",
-    "@storybook/test": "^8.2.0-alpha.2",
-    "@types/node": "^22.7.5",
-    "storybook": "^8.2.0-alpha.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-plugin-dts": "^4.2.4"
+    "@custom-elements-manifest/analyzer": "^0.10.3",
+    "@open-wc/eslint-config": "^12.0.3",
+    "@open-wc/testing": "^4.0.0",
+    "@storybook/addon-a11y": "^8.0.0",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/html": "^8.0.0",
+    "@storybook/html-vite": "^8.0.0",
+    "@storybook/web-components": "^8.0.0",
+    "@types/jest": "^29.5.13",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.11.1",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "@web/dev-server": "^0.4.6",
+    "@web/dev-server-esbuild": "^1.0.2",
+    "@web/storybook-builder": "^0.1.16",
+    "@web/storybook-framework-web-components": "^0.1.2",
+    "@web/test-runner": "^0.18.2",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "remark-gfm": "^4.0.0",
+    "storybook": "^8.0.0",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3"
   },
-  "dependencies": {
-    "remark-gfm": "^4.0.0"
+  "customElements": "./dist/custom-elements.json",
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ],
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "ignorePatterns": [
+      "**/*.test.ts"
+    ],
+    "globals": {
+      "NodeJS": true
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "import/no-unresolved": "off",
+      "import/extensions": "off",
+      "no-use-before-define": "off",
+      "no-shadow": "off"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

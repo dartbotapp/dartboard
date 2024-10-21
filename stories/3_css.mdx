@@ -1,0 +1,46 @@
+import { Meta, Canvas, Title, Subtitle } from '@storybook/blocks';
+import * as CssStories from './css.stories';
+
+<Meta title="CSS" name="CSS" />
+
+<Title>CSS</Title>
+<Subtitle>
+The component is compatible with standard CSS properties.
+Add styles in the usual way you would with any HTML element.
+</Subtitle>
+
+```css
+dartbot-dartboard {
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid black;
+  filter: drop-shadow(2px 2px 2px black);
+  transform: rotate(45deg);
+}
+```
+
+## Examples
+1. [Padding](#padding)
+2. [Margin](#margin)
+3. [Border](#border)
+4. [Width](#width)
+5. [Filter](#filter)
+6. [Transform](#transform)
+
+<br /><br />
+
+### Padding
+<Canvas of={CssStories.Padding} />
+
+### Margin
+<Canvas of={CssStories.Margin} />\
+
+### Border
+<Canvas of={CssStories.Border} />
+
+### Filter
+<Canvas of={CssStories.Filters} />
+
+### Transform
+<Canvas of={CssStories.Transform} />
+
