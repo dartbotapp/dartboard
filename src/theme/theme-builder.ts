@@ -28,9 +28,9 @@ export const baseTokens: BaseTokens = {
   [Token.numberWireShow]: '1',
   [Token.numberWireWidth]: '2.5',
   [Token.numberWireColor]: '#f1f1f1',
-  [Token.hitFillColor]: 'rgba(80, 00, 160, .6)',
   [Token.hitRadius]: '4',
-  [Token.hitStokeColor]: 'rgba(30, 33, 50, .8)',
+  [Token.hitFillColor]: 'rgba(255, 165, 0, 0.65)',
+  [Token.hitStokeColor]: '#cc8400',
   [Token.hitStrokeWidth]: '0.3',
 };
 

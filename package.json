@@ -5,12 +5,15 @@
   "author": "Stephen Marsh",
   "version": "0.1.0",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/lib/index.js",
   "module": "dist/src/index.js",
   "exports": {
     ".": "./dist/lib/index.js",
-    "./dartboard.js": "./dist/lib/dartbot-dartboard.js"
+    "./dartboard.js": "./dist/lib/dartbot-dartboard.js",
+    "./utils": "./dist/lib/utils"
   },
   "scripts": {
     "analyze": "cem analyze --outdir dist",
@@ -26,25 +29,27 @@
     "storybook:build": "tsc && npm run analyze -- --exclude dist && storybook build"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^2.0.2",
     "@custom-elements-manifest/analyzer": "^0.10.3",
     "@open-wc/eslint-config": "^12.0.3",
     "@open-wc/testing": "^4.0.0",
+    "@storybook/addon-actions": "^8.3.6",
+    "@web/test-runner-core": "^0.13.4",
     "@storybook/addon-a11y": "^8.0.0",
     "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.3.6",
     "@storybook/addon-links": "^8.0.0",
     "@storybook/html": "^8.0.0",
     "@storybook/html-vite": "^8.0.0",
     "@storybook/web-components": "^8.0.0",
-    "@types/jest": "^29.5.13",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.11.1",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
     "@web/dev-server": "^0.4.6",
     "@web/dev-server-esbuild": "^1.0.2",
-    "@web/storybook-builder": "^0.1.16",
-    "@web/storybook-framework-web-components": "^0.1.2",
     "@web/test-runner": "^0.18.2",
+    "@web/test-runner-playwright": "^0.11.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -52,11 +57,13 @@
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
     "remark-gfm": "^4.0.0",
+    "sinon": "^19.0.2",
     "storybook": "^8.0.0",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3"
   },
   "customElements": "./dist/custom-elements.json",
+  "eslintIgnore": ["**/*.test.ts"],
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
@@ -89,5 +96,7 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "dependencies": {
   }
 }

@@ -16,8 +16,14 @@
     </dartbot-dartboard>
   </div>
 
-  <script type="module">
+  <script type="module" defer>
     import '../dist/lib/dartbot-dartboard.js';
+
+    const demo = document.getElementById('demo');
+    const dartboard = demo.querySelector('dartbot-dartboard');
+    dartboard.addEventListener('dartboard-click', (e) => {
+      console.log('dartboard-click', e.detail);
+    });
   </script>
 </body>
 </html>

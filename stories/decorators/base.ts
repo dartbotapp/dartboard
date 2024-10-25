@@ -7,13 +7,11 @@ export const baseDecorator: Decorator = (story, context) => {
   const storyIdInner = `story--${context.id}-inner > div`;
   const doc = new DOMParser().parseFromString(content, 'text/html');
   const divs = doc.querySelectorAll(':scope > div');
-  divs.forEach(div => {
-    div.classList.add(storyIdInner);
-  });
+  divs.forEach(div => div.classList.add(storyIdInner));
   const out = content;
   return `
 <style data-dartbot-remove>
-  #${context.name} {
+  #${context.id} {
     display: flex;
     column-gap: .25em;
     row-gap: .25em;

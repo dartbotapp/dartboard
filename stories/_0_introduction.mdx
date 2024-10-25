@@ -1,0 +1,91 @@
+import { Meta, Title, Subtitle, Subheading } from '@storybook/blocks';
+import '../src/dartbot-dartboard.ts';
+
+<Meta title="Introduction" name="ToC" />
+
+<Title>Introduction</Title>
+<Subtitle>A vanilla web component that renders an interactive, fully customizable dartboard</Subtitle>
+<style>
+{`
+  #intro-goals {
+    display: flex;
+    flex-direction: row;
+
+    & > div {
+      flex-basis: 0;
+      flex-grow: 1;
+    }
+  }
+`}
+</style>
+<div id="intro-goals">
+  <div>
+    ## Design Goals
+    <dl>
+      <dt>HTML Canvas</dt>
+      <dd>Render using HTMLCanvas</dd>
+      <dt>Vanilla Web Component</dt>
+      <dd>Export as a dependency-free vanilla web component, usable with just HTML, CSS, and JS</dd>
+      <dt>Typescript</dt>
+      <dd>Written in Typescript</dd>
+      <dt>Styles</dt>
+      <dd>Offer fully customizable styling. Where possible use CSS to control customized settings</dd>
+      <dt>Pan & Zoom</dt>
+      <dd>Support ability to zoom in and change center point of the board</dd>
+      <dt>Support CSS props</dt>
+      <dd>CSS properties like padding, margin, filters, etc., should affect the element as expected</dd>
+      <dt>Accessibility</dt>
+      <dd>Implement accessibility recommendations. WCAG, WAI-ARIA</dd>
+      <dt>Interactivity</dt>
+      <dd>Support user interactivity features including touch input, hover, selection, highlighting, and clicking.</dd>
+    </dl>
+  </div>
+  <div>
+    <dartbot-dartboard style={{ 'padding': '2em' }}></dartbot-dartboard>
+  </div>
+</div>
+
+### Installation
+```bash
+npm install @dartbot/dartboard
+```
+```html
+<script type="module">
+  import '@dartbot/dartboard/dartbot-dartboard.js';
+</script>
+<dartbot-dartboard></dartbot-dartboard>
+```
+
+# Features
+* Styles
+  * ✅ Customize styles via CSS
+    * ✔️ Show wire
+    * ✔️ Wire shadow
+    * ✔️ Wire blur
+    * ✔️ Wire offset
+    * ✔️ Wire overhang
+    * ✔️ Wire inset
+    * ✔️ Show numbers
+  * ✅ Support standard CSS props
+    * ✔️ padding
+    * ✔️ margin
+    * ✔️ filters
+    * ✔️ transformations
+    * ✔️ zoom
+  * ✅ Resize
+* Hits✅
+* Alt board setups✅
+* Events
+  * hover
+  * click
+  * select
+  * drag
+  * touch
+* Pan and Zoom
+  * props
+  * mouse
+* Npm build and publish
+* Unit tests
+* Build badges
+* Rotate board to match pi
+* Demo pages

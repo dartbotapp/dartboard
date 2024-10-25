@@ -5,8 +5,8 @@ const filteredLogs = ['Running in dev mode', 'Lit is in dev mode'];
 
 export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   /** Test files to run */
-  files: ['src/**/*.test.ts', 'src/**/*.spec.ts'],
-
+  files: ['src/**/*.test.ts', 'test/**/*.test.ts'],
+  testsFinishTimeout: 10000,
   plugins: [esbuildPlugin({ ts: true })],
 
   /** Resolve bare module imports */
@@ -38,6 +38,9 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   //   playwrightLauncher({ product: 'chromium' }),
   //   playwrightLauncher({ product: 'firefox' }),
   //   playwrightLauncher({ product: 'webkit' }),
+  // ],
+  // browsers: [
+  //   playwrightLauncher({ product: 'chromium' })
   // ],
 
   // See documentation for all available options

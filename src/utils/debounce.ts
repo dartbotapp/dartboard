@@ -1,21 +1,3 @@
-// export const debounce = (func: any, wait: any) => {
-//   let timeout: NodeJS.Timeout;
-//   return (...args: any[]) => {
-//     clearTimeout(timeout);
-//     timeout = setTimeout(() => func(...args), wait);
-//   };
-// };
-
-// export const debounce = (func: any, delay: number) => {
-//   var timer = 0;
-//   return function debouncedFn() {
-//     if (Date.now() - timer > delay) {
-//       func();
-//     }
-//     timer = Date.now();
-//   };
-// }
-
 export const debounce = (
   func: any,
   delay: number,
@@ -48,6 +30,5 @@ export const debounce = (
       trailingCall = true;
     }
   };
-
   return debounced;
 };

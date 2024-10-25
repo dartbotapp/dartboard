@@ -1,7 +1,7 @@
 import { Board, isValidPolar, getPoint, PolarPoint } from '../utils';
 
-const DEFAULT_ZOOM = 0;
-const DEFAULT_CENTER_POINT = { radius: 0, angle: 0 };
+export const DEFAULT_ZOOM = 0;
+export const DEFAULT_CENTER_POINT = { radius: 0, angle: 0 };
 
 export interface BoardParams {
   zoom?: number;
@@ -25,11 +25,9 @@ export const setContext = (
   params: BoardParams,
   context: CanvasRenderingContext2D,
 ) => {
-  console.log('setContext');
   if (context == null) {
     return;
   }
-
   const { radius } = board;
   const sectors = board.sectors.length;
   const zoom = params.zoom ?? DEFAULT_ZOOM;
@@ -50,8 +48,11 @@ export const setContext = (
   if (zoom < 0) {
     z **= -1;
   }
-  const fit =
-    params.fit === 'cover' ? Math.max(width, height) : Math.min(width, height);
+
+  const fitMax = () => Math.max(width, height);
+  const fitMin = () => Math.min(width, height);
+  const fitMode = params.fit === 'cover' ? fitMax : fitMin;
+  const fit = fitMode();
   const scale = (fit / (radius * 2.0)) * z;
   context.scale(scale, scale);
 

@@ -1,0 +1,178 @@
+import { Meta, Canvas, Title, Subtitle } from '@storybook/blocks';
+import * as HitsStories from './hits.stories';
+
+<Meta title="Hits" name="Hits" />
+
+<Title>Hits</Title>
+
+```typescript
+interface Dartboard {
+  hits: {
+    angle: number;
+    radius: number;
+  }[];
+  ...
+}
+
+// Set the hits array to draw hits on the board. Hits is an array of polar
+// points (angle, radius) indicating the location of the hit.
+dartboard.hits = [
+  { radius: 147, angle: 0.2595 },
+  { radius: 149, angle: 0.1368 },
+  ...
+];
+```
+<Canvas of={HitsStories.Hits} />
+
+### Convert clicks into hits
+You can capture board events and convert them into hits. The component fires custom pointer
+events which convert pointer coordinates to the correct polar coordinates relative to the board.
+It also provides the sector and ring index where the event occurred.
+Custom events are prefixed with `dartboard-*`.
+See the `Events` page for more details on the custom events and their usage.
+`dartboard-click`
+`dartboard-pointerdown`
+`dartboard-pointerup`
+
+```typescript
+export type DartboardPointerEvent = CustomEvent<{
+
+  /* Original pointer event */
+  event: PointerEvent;
+
+  /* Point translated to board coordinates */
+  point: { x: number; y: number };
+
+  /* Point translated to polar coordinates */
+  polar: { angle: number; radius: number };
+
+  /* Sector index the event occurred in */
+  sector: number;
+
+  /* Ring index the event occurred in */
+  ring: number;
+}>;
+```
+
+<Canvas of={HitsStories.Clicks} />
+
+> Don't modify the hits array in place. You need to reassign the property to notify the component to update
+```
+board.hits = [...board.hits, hit];  // ✅ Do this
+board.hits.push(hit);               // ❌ Not this
+```
+
+### Helper Functions
+
+`translatePoint`<br />
+If you don't use the custom board events you can use this function to translate
+a point from the canvas coordinate system to the board coordinate system yourself.
+This function returns the point in both cartesian and polar coordinates, as well
+as the sector and ring index where the point lies.
+
+```typescript
+export class Dartboard extends HTMLElement {
+  /**
+   * Translates a point from the coordinate system the canvas uses to match
+   * dimensions the board functions work with. The point is adjusted so that
+   * 0,0 is the center of the board with the y-axis pointing up. The units
+   * are translated from pixels to millimeters relative to the board radius.
+   * @param x - X coordinate in canvas space
+   * @param y - Y coordinate in canvas space
+   */
+  translatePoint(x: number, y: number): {
+      point: { x: number; y: number; };
+      polar: PolarPoint;
+  };
+  ...
+}
+
+const dartboard = document.querySelector('dart-board');
+const detail = dartboard.translatePoint(x, y);
+const { point, polar, sector, ring } = detail;
+dartboard.hits = [...dartboard.hits, polarPoint];
+```
+
+`getTargetPoint` `getRandomPoint`
+Get points on the board for a given sector and ring.
+
+```typescript
+/**
+ * Gets the point coordinate of the center of a given area
+ * of the board defined by the sector and ring
+ */
+export declare const getTargetPoint: (
+  board: Board,
+  sectorIndex: number,
+  ringIndex: number
+) => PolarPoint;
+
+/**
+ * Creates a random point within a given sector and ring
+ * @param board Board object containing rings and sectors
+ * @param sectorIndex Sector the point should lie within
+ * @param ringIndex Ring the point should lie within
+ * @param rng Random number generator
+ */
+export declare const getRandomPoint: (
+  board: Board,
+  sectorIndex: number,
+  ringIndex: number,
+  rng?: () => number
+) => PolarPoint;
+...
+
+import { getTargetPoint, getRandomPoint } from '@dartbot/dartboard/utils';
+
+const dartboard = document.querySelector('dart-board');
+const board = dartboard.board;
+const targetPoint = getTargetPoint(board, 0, 1);
+const randomPoint = getRandomPoint(board, 0, 1);
+```
+
+`getTargetPoint` `getRandomPoint`
+Get points on the board for a given sector and ring.
+
+```typescript
+/**
+ * Gets the index of the sector the point is in
+ * @param board Board object containing rings and sectors
+ * @param p PolarPoint on the board
+ */
+export declare const getSectorIndexFromPoint: (board: Board, p: PolarPoint) => number;
+
+/**
+ * Gets the index of the ring the point is in
+ * @param board Board object containing rings and sectors
+ * @param p PolarPoint on the board
+ */
+export declare const getRingIndexFromPoint: (board: Board, p: PolarPoint) => number | undefined;
+
+
+import { getSectorIndexFromPoint, getRingIndexFromPoint } from '@dartbot/dartboard/utils';
+
+const dartboard = document.querySelector('dart-board');
+const board = dartboard.board;
+const polar = { angle: 0.5, radius: 50 };
+const s = getSectorIndexFromPoint(board, polarPoint);
+const r = getRingIndexFromPoint(board, polarPoint);
+console.log(`Point (${polar.angle},${polar.radius}) lies within sector ${s} and ring ${r}`);
+```
+
+`getSectorValue` `getSectorIndex`
+Instead of using the sector index, you can use the piont value to identify the sector.
+
+```typescript
+/** Gets the point value for the sector at the given index */
+export declare const getSectorValue: (board: Board, i: number) => number;
+
+/** Get the index of the sector that has the given value */
+export declare const getSectorIndex: (board: Board, sectorValue: number) => number | undefined;
+
+import { getSectorValue, getSectorIndex } from '@dartbot/dartboard/utils';
+
+const val = getSectorValue(board, 0);
+const idx = getSectorIndex(board, val);
+console.log(`Sector 0 has a value of ${val}`);
+console.log(`Sector with value ${val} has a value of ${idx}`);
+```

@@ -1,9 +1,10 @@
+import { DEFAULT_CENTER_POINT, DEFAULT_ZOOM } from '../draw-board';
 import { PolarPoint, getPoint } from './polar-point';
 
 export const translateCoords = (
   width: number,
   height: number,
-  zoom: number,
+  zoomVal: number,
   centerPoint: PolarPoint,
   radius: number,
   sectors: number,
@@ -16,6 +17,7 @@ export const translateCoords = (
   const y1 = y - height / 2;
 
   // Correct for zoom
+  const zoom = zoomVal ?? DEFAULT_ZOOM;
   let z = Math.abs(zoom) + 1;
   if (zoom < 0) {
     z **= -1;
@@ -36,9 +38,12 @@ export const translateCoords = (
   };
 
   // Correct for center point
-  const offset = getPoint(centerPoint);
+  const center = centerPoint ?? DEFAULT_CENTER_POINT;
+  const offset = getPoint(center);
   const x4 = point.x + offset.x;
   const y4 = point.y + offset.y;
+  point.x = x4;
+  point.y = y4;
 
-  return { x: x4, y: y4 };
+  return point;
 };

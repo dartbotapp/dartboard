@@ -17,9 +17,9 @@ type Story = StoryObj;
 export const Padding: Story = {
   name: 'story-padding',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
     <style data-dartbot-remove>
-    #${name} {
+    #${id} {
       column-gap: 2px;
       dartbot-dartboard {
         width: 33%;
@@ -30,7 +30,7 @@ export const Padding: Story = {
     }
     </style>
     <style>
-      #${name} {
+      #${id} {
         dartbot-dartboard:nth-child(1) {
           padding: 2%;
         }
@@ -42,7 +42,7 @@ export const Padding: Story = {
         }
       }
     </style>
-    <div id="${name}">
+    <div id="${id}">
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
@@ -53,9 +53,9 @@ export const Padding: Story = {
 export const Margin: Story = {
   name: 'story-margin',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
     <style data-dartbot-remove>
-    #${name} {
+    #${id} {
       background: #f443;
       dartbot-dartboard {
         background: #d0e2cc;
@@ -64,7 +64,7 @@ export const Margin: Story = {
     }
     </style>
     <style>
-      #${name} {
+      #${id} {
         dartbot-dartboard {
           padding: 2em;
         }
@@ -79,7 +79,7 @@ export const Margin: Story = {
         }
       }
     </style>
-    <div id="${name}">
+    <div id="${id}">
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
@@ -90,14 +90,14 @@ export const Margin: Story = {
 export const Border: Story = {
   name: 'story-border',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
     <style data-dartbot-remove>
-    #${name} {
+    #${id} {
       column-gap: .25em;
     }
     </style>
     <style>
-      #${name} {
+      #${id} {
         dartbot-dartboard {
           border: 0 dashed #5500b852;
         }
@@ -112,7 +112,7 @@ export const Border: Story = {
         }
       }
     </style>
-    <div id="${name}">
+    <div id="${id}">
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
@@ -123,16 +123,16 @@ export const Border: Story = {
 export const Filters: Story = {
   name: 'story-filters',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
     <style data-dartbot-remove>
-      #${name} {
+      #${id} {
         dartbot-dartboard {
           transition: filter .5s;
         }
       }
     </style>
     <style>
-      #${name} {
+      #${id} {
         dartbot-dartboard:hover {
           filter: unset!important;
         }
@@ -150,7 +150,7 @@ export const Filters: Story = {
         }
       }
     </style>
-    <div id="${name}">
+    <div id="${id}">
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
@@ -162,9 +162,9 @@ export const Filters: Story = {
 export const Transform: Story = {
   name: 'story-transform',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
     <style data-dartbot-remove>
-      #${name} {
+      #${id} {
         overflow: hidden;
         dartbot-dartboard {
           transition: transform .5s ease-out;
@@ -172,7 +172,7 @@ export const Transform: Story = {
       }
     </style>
     <style>
-      #${name} {
+      #${id} {
         dartbot-dartboard:hover {
           transform: unset!important;
         }
@@ -190,7 +190,7 @@ export const Transform: Story = {
         }
       }
     </style>
-    <div id="${name}">
+    <div id="${id}">
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>

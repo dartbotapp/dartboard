@@ -7,8 +7,36 @@ import {
   Board,
 } from './utils';
 import { Token, baseTokens, themeBuilder } from './theme';
+import { getRingIndexFromPoint, getSectorIndexFromPoint } from './utils/board';
+
+/**
+ * Custom pointer event that includes additional detail about what section
+ * of the board was interacted and points translated to the boards coordinates.
+ * The dartboard works with left hand coordinates with 0,0 centered in the
+ * middle of the boar. Browser events are reported with 0,0 in the upper left
+ * corner with the y-axis pointing down. Custom pointer events include the
+ * points translated to coordinates the board understands. Units are reported
+ * in mm relative to the board radius.
+ */
+export type DartboardPointerEvent = CustomEvent<{
+  /* Original pointer event */
+  event: PointerEvent;
+
+  /* Point translated to board coordinates */
+  point: { x: number; y: number };
+
+  /* Point translated to polar coordinates */
+  polar: PolarPoint;
+
+  /* Sector index the event occurred in */
+  sector: number;
+
+  /* Ring index the event occurred in */
+  ring: number;
+}>;
 
 const RESIZE_DEBOUNCE_MS = 100;
+
 const DEFAULT_ZOOM = 0;
 
 export class Dartboard extends HTMLElement {
@@ -104,6 +132,7 @@ export class Dartboard extends HTMLElement {
         width: 100%;
         aspect-ratio: 1 / 1;
         box-sizing: border-box;
+        user-select: none;
       }
       canvas {
         position: absolute;
@@ -139,9 +168,7 @@ export class Dartboard extends HTMLElement {
     const content = this.#template.content.cloneNode(true);
     this.#shadow.appendChild(content);
     this.#canvas = this.#shadow.querySelector('canvas')!;
-    this.#canvas.addEventListener('click', () => {
-      this.#render();
-    });
+    this.#canvas.addEventListener('click', this);
   }
 
   renderCallback() {
@@ -150,6 +177,32 @@ export class Dartboard extends HTMLElement {
 
   disconnectedCallback() {
     this.#resizeObserver.disconnect();
+    this.#canvas.removeEventListener('click', this);
+  }
+
+  handleEvent(event: Event) {
+    switch (event.type) {
+      case 'click':
+      case 'pointerdown':
+      case 'pointerup': {
+        const { offsetX, offsetY } = event as PointerEvent;
+        const { point, polar, sector, ring } = this.translatePoint(
+          offsetX,
+          offsetY,
+        );
+        const name = `dartboard-${event.type}`;
+        const detail = { event, point, polar, sector, ring };
+        const e = new CustomEvent<any>(name, {
+          detail,
+          bubbles: true,
+          cancelable: true,
+        });
+        this.dispatchEvent(e);
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   #resize(entries: ResizeObserverEntry[]) {
@@ -195,10 +248,12 @@ export class Dartboard extends HTMLElement {
   }
 
   /**
-   * Translates a point from the canvas to match
-   * dimensions of the board. The point is adjusted
-   * so that 0,0 is the center of the board and dimensions
-   * are in mm relative to the board radius.
+   * Translates a point from the coordinate system the canvas uses to match
+   * dimensions the board functions work with. The point is adjusted so that
+   * 0,0 is the center of the board with the y-axis pointing up. The units
+   * are translated from pixels to millimeters relative to the board radius.
+   * @param x - X coordinate in canvas space
+   * @param y - Y coordinate in canvas space
    */
   translatePoint(x: number, y: number) {
     const { offsetWidth, offsetHeight } = this.#canvas;
@@ -216,6 +271,8 @@ export class Dartboard extends HTMLElement {
       y,
     );
     const polar = getPolar(point.x, point.y);
-    return { point, polar, x, y };
+    const sector = getSectorIndexFromPoint(this.#board, polar);
+    const ring = getRingIndexFromPoint(this.#board, polar);
+    return { point, polar, sector, ring };
   }
 }

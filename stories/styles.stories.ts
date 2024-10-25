@@ -24,9 +24,9 @@ export const Default: Story = {
 export const Colors: Story = {
   name: 'colors',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
     <style>
-      #${name} {
+      #${id} {
         flex-flow: row wrap;
         dartbot-dartboard {
           width: 33%;
@@ -94,7 +94,7 @@ export const Colors: Story = {
         }
       }
     </style>
-    <div id="${name}">
+    <div id="${id}">
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
       <dartbot-dartboard></dartbot-dartboard>
@@ -108,9 +108,9 @@ export const Colors: Story = {
 export const WireWidth: Story = {
   name: 'wire-width',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       --dartbot-wire-show: 0;
     }
@@ -122,7 +122,7 @@ export const WireWidth: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -137,9 +137,9 @@ export const WireShadowBlur: Story = {
     aspectRatio: '16/9',
     zoom: 6,
   },
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       --dartbot-wire-shadow-show: 0;
     }
@@ -151,7 +151,7 @@ export const WireShadowBlur: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -166,9 +166,9 @@ export const WireShadowOffset: Story = {
     aspectRatio: '16/9',
     zoom: 6,
   },
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       --dartbot-wire-shadow-offset-x: 0;
       --dartbot-wire-shadow-offset-y: 0;
@@ -183,7 +183,7 @@ export const WireShadowOffset: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -199,9 +199,9 @@ export const WireRingOffset: Story = {
     zoom: 3,
     center: '{ radius: 170, angle: 0.157 }',
   },
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       --dartbot-wire-ring-offset: 0;
     }
@@ -213,7 +213,7 @@ export const WireRingOffset: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -227,9 +227,9 @@ export const NumberShow: Story = {
   parameters: {
     aspectRatio: '1/1',
   },
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       --dartbot-number-show: 1;
     }
@@ -244,7 +244,7 @@ export const NumberShow: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -260,9 +260,9 @@ export const NumberInset: Story = {
     zoom: 3,
     center: '{ radius: 170, angle: 0.157 }',
   },
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       --dartbot-number-inset: 5;
     }
@@ -274,7 +274,7 @@ export const NumberInset: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>

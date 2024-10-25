@@ -21,11 +21,10 @@ export const create = () => ({
   ],
 });
 
-/** Converts radians to degrees */
 export const radiansToDegrees = (radians: number): number =>
   radians * (180 / Math.PI);
 
-/** The size of the angle for a single board sector */
+/** Gets the size of the angle in radians for a single board sector */
 export const getSectorWidth = (b: Board): number =>
   (2 * Math.PI) / b.sectors.length;
 
@@ -70,6 +69,13 @@ export const getTargetPoint = (
   return { radius, angle };
 };
 
+/**
+ * Creates a random point within a given sector and ring
+ * @param board Board object containing rings and sectors
+ * @param sectorIndex Sector the point should lie within
+ * @param ringIndex Ring the point should lie within
+ * @param rng Random number generator
+ */
 export const getRandomPoint = (
   board: Board,
   sectorIndex: number,
@@ -87,6 +93,11 @@ export const getRandomPoint = (
   return { radius, angle };
 };
 
+/**
+ * Gets the index of the sector the point is in
+ * @param board Board object containing rings and sectors
+ * @param p PolarPoint on the board
+ */
 export const getSectorIndexFromPoint = (
   board: Board,
   p: PolarPoint,
@@ -99,6 +110,11 @@ export const getSectorIndexFromPoint = (
   return i;
 };
 
+/**
+ * Gets the index of the ring the point is in
+ * @param board Board object containing rings and sectors
+ * @param p PolarPoint on the board
+ */
 export const getRingIndexFromPoint = (
   board: Board,
   p: PolarPoint,

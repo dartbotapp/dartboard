@@ -17,16 +17,16 @@ type Story = StoryObj;
 export const Dimensions: Story = {
   name: 'story-dimensions',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style data-dartbot-remove>
-  #${name} {
+  #${id} {
     dartbot-dartboard {
       border: .1em dashed #0002;
     }
   }
 </style>
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       width: 8em;
       height: 18em;
@@ -41,7 +41,7 @@ export const Dimensions: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -52,9 +52,9 @@ export const Dimensions: Story = {
 export const Dynamic: Story = {
   name: 'Resize',
   decorators: [],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style data-dartbot-remove>
-#${name} {
+#${id} {
   border: 2px dashed #0002;
   max-width: 60em;
   min-width: 10em;
@@ -67,14 +67,14 @@ export const Dynamic: Story = {
 }
 </style>
 <style>
-  #${name} {
+  #${id} {
     overflow: auto;
     resize: both;
     width: 30em;
   }
 </style>
-<p>Click and drag the bottom right corner of the container to resize it.</p>
-<div id="${name}">
+<pre>Click and drag the bottom right corner to resize</pre>
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
 </div>
   `,
@@ -84,16 +84,16 @@ export const Width: Story = {
   name: 'story-width',
   tags: ['hidden'],
   decorators: [],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style data-dartbot-remove>
-  #${name} {
+  #${id} {
     dartbot-dartboard {
       border: 2px dashed #0002;
     }
   }
 </style>
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       width: 30em;
     }
@@ -105,7 +105,7 @@ export const Width: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
@@ -116,16 +116,16 @@ export const Width: Story = {
 export const AspectRatio: Story = {
   name: 'story-aspect',
   tags: ['hidden'],
-  render: (_, { name }) => `
+  render: (_, { id }) => `
 <style data-dartbot-remove>
-  #${name} {
+  #${id} {
     dartbot-dartboard {
       border: 2px dashed #0002;
     }
   }
 </style>
 <style>
-  #${name} {
+  #${id} {
     dartbot-dartboard:nth-child(1) {
       aspect-ratio: 1 / 1;
       width: 20em;
@@ -136,7 +136,7 @@ export const AspectRatio: Story = {
     }
   }
 </style>
-<div id="${name}">
+<div id="${id}">
   <dartbot-dartboard></dartbot-dartboard>
   <dartbot-dartboard></dartbot-dartboard>
 </div>
