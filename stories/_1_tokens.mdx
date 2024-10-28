@@ -1,8 +1,18 @@
 import { Meta, Canvas, Title, Description, Subtitle } from '@storybook/blocks';
 import { Token, baseTokens } from '../src/theme';
+import '../src/dartbot-dartboard.ts';
 
 export const colorSample = (c) =>
   (<div className="color-sample" style={{ backgroundColor: c  }}></div>);
+
+export const tokenRow = (token, sample, description) => (
+  <tr>
+    <td>{token}</td>
+    <td>{baseTokens[token]}</td>
+    <td>{sample ? colorSample(baseTokens[token]) : ''}</td>
+    <td>{description} </td>
+  </tr>
+);
 
 <Meta title="Design Tokens" name="tokens" />
 
@@ -38,153 +48,47 @@ export const colorSample = (c) =>
       Colors Palette
       </th>
     </tr>
-    <tr>
-      <td>{Token.boardBg}</td>
-      <td>{baseTokens[Token.boardBg]}</td>
-      <td>{colorSample(baseTokens[Token.boardBg])}</td>
-      <td> The background color of the dartboard </td>
-    </tr>
-    <tr>
-      <td>{Token.sectorBg1}</td>
-      <td>{baseTokens[Token.sectorBg1]}</td>
-      <td>{colorSample(baseTokens[Token.sectorBg1])}</td>
-      <td>Board sector color 1</td>
-    </tr>
-    <tr>
-      <td>{Token.sectorBg2}</td>
-      <td>{baseTokens[Token.sectorBg2]}</td>
-      <td>{colorSample(baseTokens[Token.sectorBg2])}</td>
-      <td>Board sector color 2</td>
-    </tr>
-    <tr>
-      <td>{Token.sectorBg3}</td>
-      <td>{baseTokens[Token.sectorBg3]}</td>
-      <td>{colorSample(baseTokens[Token.sectorBg3])}</td>
-      <td>Board sector color 3</td>
-    </tr>
-    <tr>
-      <td>{Token.sectorBg4}</td>
-      <td>{baseTokens[Token.sectorBg4]}</td>
-      <td>{colorSample(baseTokens[Token.sectorBg4])}</td>
-      <td>Board sector color 4</td>
-    </tr>
-    <tr>
-      <td>{Token.wireColor}</td>
-      <td>{baseTokens[Token.wireColor]}</td>
-      <td>{colorSample(baseTokens[Token.wireColor])}</td>
-      <td>Color of the wire</td>
-    </tr>
-    <tr>
-      <td>{Token.wireShadowColor}</td>
-      <td>{baseTokens[Token.wireShadowColor]}</td>
-      <td>{colorSample(baseTokens[Token.wireShadowColor])}</td>
-      <td>Color of the wire shadow</td>
-    </tr>
-    <tr>
-      <td>{Token.numberColor}</td>
-      <td>{baseTokens[Token.numberColor]}</td>
-      <td>{colorSample(baseTokens[Token.numberColor])}</td>
-      <td>Color of the numbers</td>
-    </tr>
-    <tr>
-      <td>{Token.numberWireColor}</td>
-      <td>{baseTokens[Token.numberWireColor]}</td>
-      <td>{colorSample(baseTokens[Token.numberWireColor])}</td>
-      <td>Color of the outer ring wire</td>
-    </tr>
+    {tokenRow(Token.boardBg, true, 'The background color of the dartboard')}
+    {tokenRow(Token.sectorBg1, true, 'Board sector color 1')}
+    {tokenRow(Token.sectorBg2, true, 'Board sector color 2')}
+    {tokenRow(Token.sectorBg3, true, 'Board sector color 3')}
+    {tokenRow(Token.sectorBg4, true, 'Board sector color 4')}
+    {tokenRow(Token.wireColor, true, 'Color of the wire')}
+    {tokenRow(Token.wireShadowColor, true, 'Color of the wire shadow')}
+    {tokenRow(Token.numberColor, true, 'Color of the numbers')}
+    {tokenRow(Token.numberWireColor, true, 'Color of the outer ring wire')}
     <tr>
       <th colSpan="4">
       Wire
       </th>
     </tr>
-    <tr>
-      <td>{Token.wireShow}</td>
-      <td>{baseTokens[Token.wireShow]}</td>
-      <td></td>
-      <td>Whether to show the wire between sections</td>
-    </tr>
-    <tr>
-      <td>{Token.wireWidth}</td>
-      <td>{baseTokens[Token.wireWidth]}</td>
-      <td></td>
-      <td>Width of the wireframe</td>
-    </tr>
-    <tr>
-      <td>{Token.wireShadowShow}</td>
-      <td>{baseTokens[Token.wireShadowShow]}</td>
-      <td></td>
-      <td>Whether to show a drop shadow under the wire</td>
-    </tr>
-    <tr>
-      <td>{Token.wireShadowBlur}</td>
-      <td>{baseTokens[Token.wireShadowBlur]}</td>
-      <td></td>
-      <td>Blur radius of the wire shadow</td>
-    </tr>
-    <tr>
-      <td>{Token.wireShadowOffsetX}</td>
-      <td>{baseTokens[Token.wireShadowOffsetX]}</td>
-      <td></td>
-      <td>Horizontal offset of the wire shadow</td>
-    </tr>
-    <tr>
-      <td>{Token.wireShadowOffsetY}</td>
-      <td>{baseTokens[Token.wireShadowOffsetY]}</td>
-      <td></td>
-      <td>Vertical offset of the wire shadow</td>
-    </tr>
-    <tr>
-      <td>{Token.wireRingOffset}</td>
-      <td>{baseTokens[Token.wireRingOffset]}</td>
-      <td></td>
-      <td>Distance the wire should extend outside the last ring</td>
-    </tr>
+    {tokenRow(Token.wireShow, false, 'Whether to show the wire between sections')}
+    {tokenRow(Token.wireWidth, false, 'Width of the wireframe')}
+    {tokenRow(Token.wireShadowShow, false, 'Whether to show a drop shadow under the wire')}
+    {tokenRow(Token.wireShadowBlur, false, 'Blur radius of the wire shadow')}
+    {tokenRow(Token.wireShadowOffsetX, false, 'Horizontal offset of the wire shadow')}
+    {tokenRow(Token.wireShadowOffsetY, false, 'Vertical offset of the wire shadow')}
+    {tokenRow(Token.wireRingOffset, false, 'Distance the wire should extend outside the last ring')}
     <tr>
       <th colSpan="4">
       Numbers
       </th>
     </tr>
-    <tr>
-      <td>{Token.numberShow}</td>
-      <td>{baseTokens[Token.numberShow]}</td>
-      <td></td>
-      <td>Show the sector numbers around the outer edge</td>
-    </tr>
-    <tr>
-      <td>{Token.numberWidth}</td>
-      <td>{baseTokens[Token.numberWidth]}</td>
-      <td></td>
-      <td>Width of the line stroke for numbers</td>
-    </tr>
-    <tr>
-      <td>{Token.numberFont}</td>
-      <td>{baseTokens[Token.numberFont]}</td>
-      <td></td>
-      <td>Font of the numbers</td>
-    </tr>
-    <tr>
-      <td>{Token.numberInset}</td>
-      <td>{baseTokens[Token.numberInset]}</td>
-      <td></td>
-      <td>Distance the numbers should be inset from the board edge</td>
-    </tr>
-    <tr>
-      <td>{Token.numberWireShow}</td>
-      <td>{baseTokens[Token.numberWireShow]}</td>
-      <td></td>
-      <td>Hide or show the wire ring for numbers around the board</td>
-    </tr>
-    <tr>
-      <td>{Token.numberWireWidth}</td>
-      <td>{baseTokens[Token.numberWireWidth]}</td>
-      <td></td>
-      <td>Width of the outer ring wire for numbers</td>
-    </tr>
+    {tokenRow(Token.numberShow, false, 'Show the sector numbers around the outer edge')}
+    {tokenRow(Token.numberWidth, false, 'Width of the line stroke for numbers')}
+    {tokenRow(Token.numberFont, false, 'Font of the numbers')}
+    {tokenRow(Token.numberInset, false, 'Distance the numbers should be inset from the board edge')}
+    {tokenRow(Token.numberWireShow, false, 'Hide or show the wire ring for numbers around the board')}
+    {tokenRow(Token.numberWireWidth, false, 'Width of the outer ring wire for numbers')}
+    {tokenRow(Token.hitFillColor, false, 'Color of the hit area')}
+    {tokenRow(Token.hitRadius, false, 'Radius of the hit area')}
+    {tokenRow(Token.hitStokeColor, false, 'Color of the hit outline stroke')}
+    {tokenRow(Token.hitStrokeWidth, false, 'Width of the hit outline stroke')}
   </tbody>
 </table>
-> Numeric distances and sizes are in millimeters. They are drawn relative to the diameter of the dartboard.<br />
-  A standard board that is 450mm in diameter so a `--dartbot-wire-width: 0.8` would
-  draw a wire that looks 0.8mm wide.
+> Numeric distances and sizes are in **millimeters**. They are drawn relative to the diameter of the dartboard.
+  A standard board is 450mm in diameter so `--dartbot-wire-width: 0.8` would
+  draw a wire with the pixel width that makes it look 0.8mm wide relative to the 450mm dartboard.
 
 > Toggle features on and off by setting a value to <code>1</code> or <code>0</code>
 
@@ -196,8 +100,27 @@ variables for the element or scope you want the styles to apply to
 using standard CSS selectors.
 
 Here is an example of how to apply the design tokens for all dartboards on a page.
-```css
+```html
+<style>
+  dartbot-dartboard {
+    --dartbot-board-bg: #283618;
+    --dartbot-sector-bg-1: #606c38;
+    --dartbot-sector-bg-2: #fefae0;
+    --dartbot-sector-bg-3: #edbf8c;
+    --dartbot-sector-bg-4: #bc6c25;
+    --dartbot-wire-width: 0.8;
+    --dartbot-wire-color: #271300;
+    --dartbot-wire-shadow-show: 0;
+  }
+</style>
+
+<dartbot-dartboard></dartbot-dartboard>
+```
+
+<style>
+{`
 dartbot-dartboard {
+  max-height: 30em;
   --dartbot-board-bg: #283618;
   --dartbot-sector-bg-1: #606c38;
   --dartbot-sector-bg-2: #fefae0;
@@ -207,4 +130,44 @@ dartbot-dartboard {
   --dartbot-wire-color: #271300;
   --dartbot-wire-shadow-show: 0;
 }
+`}
+</style>
+
+<dartbot-dartboard></dartbot-dartboard>
+
+Or apply the styles to a specific dartboard using a class or id selector.
+```html
+<style>
+  dartbot-dartboard.high-contrast {
+    --dartbot-board-bg: #080808;
+    --dartbot-sector-bg-1: rgba(10, 10, 10, 1);
+    --dartbot-sector-bg-2: rgba(255, 250, 231, 1);
+    --dartbot-sector-bg-3: rgba(255, 18, 18, 1);
+    --dartbot-sector-bg-4: rgba(194, 207, 255, 1);
+    --dartbot-wire-show: 1;
+    --dartbot-wire-color: #000000;
+    --dartbot-wire-width: 2;
+    --dartbot-wire-shadow-show: 0;
+  }
+</style>
+
+<dartbot-dartboard class="high-contrast"></dartbot-dartboard>
 ```
+
+<style>
+{`
+  dartbot-dartboard.high-contrast {
+    --dartbot-board-bg: #080808;
+    --dartbot-sector-bg-1: rgba(10, 10, 10, 1);
+    --dartbot-sector-bg-2: rgba(255, 250, 231, 1);
+    --dartbot-sector-bg-3: rgba(255, 18, 18, 1);
+    --dartbot-sector-bg-4: rgba(194, 207, 255, 1);
+    --dartbot-wire-show: 1;
+    --dartbot-wire-color: #000000;
+    --dartbot-wire-width: 2;
+    --dartbot-wire-shadow-show: 0;
+  }
+`}
+</style>
+
+<dartbot-dartboard class="high-contrast"></dartbot-dartboard>

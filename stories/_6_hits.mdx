@@ -4,7 +4,7 @@ import * as HitsStories from './hits.stories';
 <Meta title="Hits" name="Hits" />
 
 <Title>Hits</Title>
-
+<Subtitle>Draw hits on the board</Subtitle>
 ```typescript
 interface Dartboard {
   hits: {
@@ -13,9 +13,13 @@ interface Dartboard {
   }[];
   ...
 }
+```
 
-// Set the hits array to draw hits on the board. Hits is an array of polar
-// points (angle, radius) indicating the location of the hit.
+```typescript
+// Set the hits array to draw hits on the board.
+// Hits is an array of polar points (angle, radius) indicating the location of the hit.
+// The point indicates the angle and radius of the location from the center of the board.
+// The angle is in radians and the radius is in millimeters.
 dartboard.hits = [
   { radius: 147, angle: 0.2595 },
   { radius: 149, angle: 0.1368 },
@@ -82,7 +86,7 @@ export class Dartboard extends HTMLElement {
    */
   translatePoint(x: number, y: number): {
       point: { x: number; y: number; };
-      polar: PolarPoint;
+      polar: { angle: number; radius: number; };
   };
   ...
 }
@@ -90,7 +94,7 @@ export class Dartboard extends HTMLElement {
 const dartboard = document.querySelector('dart-board');
 const detail = dartboard.translatePoint(x, y);
 const { point, polar, sector, ring } = detail;
-dartboard.hits = [...dartboard.hits, polarPoint];
+dartboard.hits = [...dartboard.hits, polar];
 ```
 
 `getTargetPoint` `getRandomPoint`
@@ -120,8 +124,8 @@ export declare const getRandomPoint: (
   ringIndex: number,
   rng?: () => number
 ) => PolarPoint;
-...
-
+```
+```typescript
 import { getTargetPoint, getRandomPoint } from '@dartbot/dartboard/utils';
 
 const dartboard = document.querySelector('dart-board');
@@ -147,8 +151,9 @@ export declare const getSectorIndexFromPoint: (board: Board, p: PolarPoint) => n
  * @param p PolarPoint on the board
  */
 export declare const getRingIndexFromPoint: (board: Board, p: PolarPoint) => number | undefined;
+```
 
-
+```typescript
 import { getSectorIndexFromPoint, getRingIndexFromPoint } from '@dartbot/dartboard/utils';
 
 const dartboard = document.querySelector('dart-board');
@@ -168,7 +173,9 @@ export declare const getSectorValue: (board: Board, i: number) => number;
 
 /** Get the index of the sector that has the given value */
 export declare const getSectorIndex: (board: Board, sectorValue: number) => number | undefined;
+```
 
+```typescript
 import { getSectorValue, getSectorIndex } from '@dartbot/dartboard/utils';
 
 const val = getSectorValue(board, 0);

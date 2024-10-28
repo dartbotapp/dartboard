@@ -19,33 +19,39 @@ import '../src/dartbot-dartboard.ts';
 `}
 </style>
 <div id="intro-goals">
-  <div>
+  <div style={{ 'padding-right': '4em '}}>
     ## Design Goals
-    <dl>
-      <dt>HTML Canvas</dt>
-      <dd>Render using HTMLCanvas</dd>
-      <dt>Vanilla Web Component</dt>
-      <dd>Export as a dependency-free vanilla web component, usable with just HTML, CSS, and JS</dd>
-      <dt>Typescript</dt>
-      <dd>Written in Typescript</dd>
-      <dt>Styles</dt>
-      <dd>Offer fully customizable styling. Where possible use CSS to control customized settings</dd>
-      <dt>Pan & Zoom</dt>
-      <dd>Support ability to zoom in and change center point of the board</dd>
-      <dt>Support CSS props</dt>
-      <dd>CSS properties like padding, margin, filters, etc., should affect the element as expected</dd>
-      <dt>Accessibility</dt>
-      <dd>Implement accessibility recommendations. WCAG, WAI-ARIA</dd>
-      <dt>Interactivity</dt>
-      <dd>Support user interactivity features including touch input, hover, selection, highlighting, and clicking.</dd>
-    </dl>
+
+    🎨 **HTML Canvas**
+    Render using HTMLCanvas
+
+    🍦 **Vanilla Web Component**
+    Export as a dependency-free vanilla web component, usable with just HTML, CSS, and JS
+
+    #️⃣ **Typescript**
+    Written in Typescript
+
+    🌈 **Styles**
+    Offer fully customizable styling. Where possible use CSS to control customized settings
+
+    🧾 **Support CSS props**
+    CSS properties like padding, margin, filters, etc., should affect the element as expected
+
+    🔎 **Pan & Zoom**
+    Support ability to zoom in and change center point of the board
+
+    🌐 **Accessibility**
+    Implement accessibility recommendations. WCAG, WAI-ARIA
+
+    🕹️ **Interactivity**
+    Support user interactivity features including touch input, hover, selection, highlighting, and clicking.
   </div>
   <div>
-    <dartbot-dartboard style={{ 'padding': '2em' }}></dartbot-dartboard>
+    <dartbot-dartboard></dartbot-dartboard>
   </div>
 </div>
 
-### Installation
+## Installation
 ```bash
 npm install @dartbot/dartboard
 ```
@@ -53,39 +59,24 @@ npm install @dartbot/dartboard
 <script type="module">
   import '@dartbot/dartboard/dartbot-dartboard.js';
 </script>
+
 <dartbot-dartboard></dartbot-dartboard>
 ```
 
-# Features
-* Styles
-  * ✅ Customize styles via CSS
-    * ✔️ Show wire
-    * ✔️ Wire shadow
-    * ✔️ Wire blur
-    * ✔️ Wire offset
-    * ✔️ Wire overhang
-    * ✔️ Wire inset
-    * ✔️ Show numbers
-  * ✅ Support standard CSS props
-    * ✔️ padding
-    * ✔️ margin
-    * ✔️ filters
-    * ✔️ transformations
-    * ✔️ zoom
-  * ✅ Resize
-* Hits✅
-* Alt board setups✅
-* Events
-  * hover
-  * click
-  * select
-  * drag
-  * touch
-* Pan and Zoom
-  * props
-  * mouse
-* Npm build and publish
-* Unit tests
-* Build badges
-* Rotate board to match pi
-* Demo pages
+## Why Web Components?
+Web components are a set of web platform APIs that allow you to create new custom, reusable,
+encapsulated HTML tags to use in web pages and web apps. Custom components and widgets build
+on the Web Component standards, will work across modern browsers, and can be used with any
+JavaScript library or framework that works with HTML.
+
+## Browser Support
+Dartbot is tested in the latest version of the following browsers.
+<img src="/storybook-public/chrome.png" alt="Chrome" title="Chrome" width="64" height="64" />
+<img src="/storybook-public/edge.png" alt="Edge" title="Edge" width="64" height="64" />
+<img src="/storybook-public/firefox.png" alt="Firefox" title="Firefox" width="64" height="64" />
+<img src="/storybook-public/opera.png" alt="Opera" title="Opera" width="64" height="64" />
+
+Older browsers may require [polyfills to support web component](https://github.com/webcomponents/polyfills) features required by this library.
+
+## License
+Dartbot was created by Stephen Marsh. It’s available under the terms of the MIT license.

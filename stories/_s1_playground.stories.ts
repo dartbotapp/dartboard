@@ -1,4 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/html';
+import { withActions } from '@storybook/addon-actions/decorator';
 import { baseTokens, Token } from '../src/theme';
 import '../src/dartbot-dartboard';
 
@@ -10,6 +11,16 @@ const meta = {
   title: 'Playground',
   render: () => `<dartbot-dartboard></dartbot-dartboard>`,
   args: {},
+  decorators: [withActions],
+  parameters: {
+    actions: {
+      handles: [
+        'dartboard-click',
+        'dartboard-pointerdown',
+        'dartboard-pointerup',
+      ],
+    },
+  },
 } satisfies Meta<DartboardProps>;
 
 export default meta;
@@ -39,6 +50,10 @@ export const Playground: Story = {
     [Token.numberWireColor]: baseTokens[Token.numberWireColor],
     [Token.numberWireShow]: baseTokens[Token.numberWireShow] === '1',
     [Token.numberWireWidth]: parseFloat(baseTokens[Token.numberWireWidth]),
+    [Token.hitRadius]: parseFloat(baseTokens[Token.hitRadius]),
+    [Token.hitFillColor]: baseTokens[Token.hitFillColor],
+    [Token.hitStokeColor]: baseTokens[Token.hitStokeColor],
+    [Token.hitStrokeWidth]: parseFloat(baseTokens[Token.hitStrokeWidth]),
   },
   argTypes: {
     [Token.boardBg]: {
@@ -107,8 +122,24 @@ export const Playground: Story = {
     [Token.numberWireWidth]: {
       description: 'Width of the line stroke for the number wire',
     },
+    [Token.hitRadius]: {
+      description: 'Radius of the hit marker',
+      control: { type: 'number' },
+    },
+    [Token.hitFillColor]: {
+      description: 'Fill color of the hit marker',
+      control: { type: 'color' },
+    },
+    [Token.hitStokeColor]: {
+      description: 'Stroke color of the hit marker',
+      control: { type: 'color' },
+    },
+    [Token.hitStrokeWidth]: {
+      description: 'Width of the stroke of the hit marker',
+      control: { type: 'number' },
+    },
   },
-  render: params => {
+  render: (params, { id }) => {
     const style = `
       .story-playground {
         dartbot-dartboard
@@ -133,6 +164,10 @@ export const Playground: Story = {
           ${Token.numberWireShow}: ${params[Token.numberWireShow] ? '1' : '0'};
           ${Token.numberWireColor}: ${params[Token.numberWireColor]};
           ${Token.numberWireWidth}: ${params[Token.numberWireWidth]};
+          ${Token.hitRadius}: ${params[Token.hitRadius]};
+          ${Token.hitFillColor}: ${params[Token.hitFillColor]};
+          ${Token.hitStokeColor}: ${params[Token.hitStokeColor]};
+          ${Token.hitStrokeWidth}: ${params[Token.hitStrokeWidth]};
         }
       }
     `;
@@ -147,7 +182,24 @@ export const Playground: Story = {
         }
       </style>
       <style>${style}</style>
-      <div class="story-playground">
+
+      <script defer>
+      (() => {
+        const root = document.getElementById('${id}');
+        const board = root.querySelector('dartbot-dartboard');
+        board.addEventListener('dartboard-click', (event) => {
+
+          // Get the point and ring/sector info from the event
+          const { detail, target } = event;
+          const { polar, point, sector, ring } = detail;
+
+          // Add a new hit to the board
+          target.hits = [...target.hits, polar];
+        });
+      })();
+      </script>
+
+      <div id="${id}" class="story-playground">
         <dartbot-dartboard></dartbot-dartboard>
       </div>
     `;
