@@ -1,7 +1,7 @@
 <h1 align="center">&lt;dartbot-dartboard&gt; A Dartboard Web Component</h1>
 
 
-![Dartboards rendered with different styles](https://github.com/dartbotapp/dartboard/blob/main/storybook-public/board_themes.jpg?raw=true)
+![Dartboards rendered with different styles](https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/board_themes.JPG)
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
@@ -135,6 +135,7 @@ To run a local development server that serves the basic demo located in `demo/in
 * Pan and Zoom
   * props
   * mouse
+* Export as image
 * Npm build and publish
 * Unit tests
 * Build badges
