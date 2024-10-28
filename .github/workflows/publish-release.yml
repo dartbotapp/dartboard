@@ -1,7 +1,7 @@
-name: Deploy Storybook
+name: Publish Release
 on:
-  push:
-  workflow_dispatch:
+  release:
+    types: [published]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
       - run: npm ci
       - run: npm test
 
-  publish-storybok:
+  publish-storybook:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -32,3 +32,17 @@ jobs:
           aws-region: us-east-1
       - name: Deploy static site to S3 bucket
         run: aws s3 sync ./storybook-static/ s3://docs.dartbot.com --delete
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_ACCESS_KEY}}
