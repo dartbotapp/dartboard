@@ -3,6 +3,13 @@
 
 ![Dartboards rendered with different styles](https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/board_themes.JPG)
 
+---
+
+<a href="https://docs.dartbot.com"><img style="width:1em" src="https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/favicon.svg" /> Storybook Docs</a><br />
+Source: [github.com/dartbotapp/dartboard](https://github.com/dartbotapp/dartboard)
+
+---
+
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 # Design Goals
@@ -38,15 +45,6 @@ npm i @dartbot/dartboard
 
 <dartbot-dartboard></dartbot-dartboard>
 ```
-
----
-
-Documentation: [docs.dartbot.com](https://docs.dartbot.com)
-
-Source: [github.com/dartbotapp/dartboard](https://github.com/dartbotapp/dartboard)
-
----
-
 
 ## Linting and formatting
 
