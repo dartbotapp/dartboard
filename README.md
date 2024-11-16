@@ -3,21 +3,11 @@
 ![Dartboards rendered with different styles](https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/board_themes.JPG)
 
 <div>
-  <a href="https://github.com/dartbotapp/dartboard" rel="noopener noreferrer" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat&amp;logo=github&amp;logoColor=white" alt="GitHub" />
-  </a>
-  <a href="https://docs.dartbot.com" rel="noopener noreferrer" target="_blank">
-    <img src="https://img.shields.io/badge/Docs-Website-232323.svg?style=flat" alt="Documentation" />
-  </a>
-  <a href="https://www.npmjs.com/package/@dartbot/dartboard" rel="noopener noreferrer" target="_blank">
-    <img src="https://img.shields.io/npm/dw/@dartbot/dartboard?label=npm&amp;style=flat" alt="npm" />
-  </a>
-  <a href="https://github.com/dartbotapp/dartboard/actions/workflows/publish.yml" rel="noopener noreferrer" target="_blank">
-    <img src="https://img.shields.io/github/actions/workflow/status/dartbotapp/dartboard/publish.yml" alt="GitHub Actions Workflow Status" />
-  </a>
-  <a href="https://github.com/dartbotapp/dartboard/blob/main/LICENSE" rel="noopener noreferrer" target="_blank">
-    <img src="https://img.shields.io/badge/license-MIT-232323.svg?style=flat" alt="License" />
-  </a>
+  <a href="https://github.com/dartbotapp/dartboard" rel="noopener noreferrer" target="_blank"><img src="https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat&amp;logo=github&amp;logoColor=white" alt="GitHub" /></a>
+  <a href="https://docs.dartbot.com" rel="noopener noreferrer" target="_blank"><img src="https://img.shields.io/badge/Docs-Website-232323.svg?style=flat" alt="Documentation" /></a>
+  <a href="https://www.npmjs.com/package/@dartbot/dartboard" rel="noopener noreferrer" target="_blank"><img src="https://img.shields.io/npm/dw/@dartbot/dartboard?label=npm&amp;style=flat" alt="npm" /></a>
+  <a href="https://github.com/dartbotapp/dartboard/actions/workflows/publish.yml" rel="noopener noreferrer" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/dartbotapp/dartboard/publish.yml" alt="GitHub Actions Workflow Status" /></a>
+  <a href="https://github.com/dartbotapp/dartboard/blob/main/LICENSE" rel="noopener noreferrer" target="_blank"><img src="https://img.shields.io/badge/license-MIT-232323.svg?style=flat" alt="License" /></a>
 </div>
 
 ---
