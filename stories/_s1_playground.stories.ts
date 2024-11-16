@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from '@storybook/html';
 import { withActions } from '@storybook/addon-actions/decorator';
-import { baseTokens, Token } from '../src/theme';
+import { tokenDefaults, Token } from '../src/theme';
 import '../src/dartbot-dartboard';
 
 export type DartboardProps = {
@@ -29,31 +29,35 @@ type Story = StoryObj<DartboardProps>;
 export const Playground: Story = {
   name: 'Playground',
   args: {
-    [Token.boardBg]: baseTokens[Token.boardBg],
-    [Token.sectorBg1]: baseTokens[Token.sectorBg1],
-    [Token.sectorBg2]: baseTokens[Token.sectorBg2],
-    [Token.sectorBg3]: baseTokens[Token.sectorBg3],
-    [Token.sectorBg4]: baseTokens[Token.sectorBg4],
-    [Token.wireShow]: baseTokens[Token.wireShow] === '1',
-    [Token.wireWidth]: parseFloat(baseTokens[Token.wireWidth]),
-    [Token.wireColor]: baseTokens[Token.wireColor],
-    [Token.wireShadowShow]: baseTokens[Token.wireShadowShow] === '1',
-    [Token.wireShadowColor]: baseTokens[Token.wireShadowColor],
-    [Token.wireShadowBlur]: parseFloat(baseTokens[Token.wireShadowBlur]),
-    [Token.wireShadowOffsetX]: parseFloat(baseTokens[Token.wireShadowOffsetX]),
-    [Token.wireShadowOffsetY]: parseFloat(baseTokens[Token.wireShadowOffsetY]),
-    [Token.wireRingOffset]: parseFloat(baseTokens[Token.wireRingOffset]),
-    [Token.numberShow]: baseTokens[Token.numberShow] === '1',
-    [Token.numberWidth]: parseFloat(baseTokens[Token.numberWidth]),
-    [Token.numberColor]: baseTokens[Token.numberColor],
-    [Token.numberInset]: parseFloat(baseTokens[Token.numberInset]),
-    [Token.numberWireColor]: baseTokens[Token.numberWireColor],
-    [Token.numberWireShow]: baseTokens[Token.numberWireShow] === '1',
-    [Token.numberWireWidth]: parseFloat(baseTokens[Token.numberWireWidth]),
-    [Token.hitRadius]: parseFloat(baseTokens[Token.hitRadius]),
-    [Token.hitFillColor]: baseTokens[Token.hitFillColor],
-    [Token.hitStokeColor]: baseTokens[Token.hitStokeColor],
-    [Token.hitStrokeWidth]: parseFloat(baseTokens[Token.hitStrokeWidth]),
+    [Token.boardBg]: tokenDefaults[Token.boardBg],
+    [Token.sectorBg1]: tokenDefaults[Token.sectorBg1],
+    [Token.sectorBg2]: tokenDefaults[Token.sectorBg2],
+    [Token.sectorBg3]: tokenDefaults[Token.sectorBg3],
+    [Token.sectorBg4]: tokenDefaults[Token.sectorBg4],
+    [Token.wireShow]: tokenDefaults[Token.wireShow] === '1',
+    [Token.wireWidth]: parseFloat(tokenDefaults[Token.wireWidth]),
+    [Token.wireColor]: tokenDefaults[Token.wireColor],
+    [Token.wireShadowShow]: tokenDefaults[Token.wireShadowShow] === '1',
+    [Token.wireShadowColor]: tokenDefaults[Token.wireShadowColor],
+    [Token.wireShadowBlur]: parseFloat(tokenDefaults[Token.wireShadowBlur]),
+    [Token.wireShadowOffsetX]: parseFloat(
+      tokenDefaults[Token.wireShadowOffsetX],
+    ),
+    [Token.wireShadowOffsetY]: parseFloat(
+      tokenDefaults[Token.wireShadowOffsetY],
+    ),
+    [Token.wireRingOffset]: parseFloat(tokenDefaults[Token.wireRingOffset]),
+    [Token.numberShow]: tokenDefaults[Token.numberShow] === '1',
+    [Token.numberWidth]: parseFloat(tokenDefaults[Token.numberWidth]),
+    [Token.numberColor]: tokenDefaults[Token.numberColor],
+    [Token.numberInset]: parseFloat(tokenDefaults[Token.numberInset]),
+    [Token.numberWireColor]: tokenDefaults[Token.numberWireColor],
+    [Token.numberWireShow]: tokenDefaults[Token.numberWireShow] === '1',
+    [Token.numberWireWidth]: parseFloat(tokenDefaults[Token.numberWireWidth]),
+    [Token.hitRadius]: parseFloat(tokenDefaults[Token.hitRadius]),
+    [Token.hitFillColor]: tokenDefaults[Token.hitFillColor],
+    [Token.hitStokeColor]: tokenDefaults[Token.hitStokeColor],
+    [Token.hitStrokeWidth]: parseFloat(tokenDefaults[Token.hitStrokeWidth]),
   },
   argTypes: {
     [Token.boardBg]: {

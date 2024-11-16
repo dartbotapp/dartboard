@@ -1,5 +1,5 @@
 import { Meta, Canvas, Title, Description, Subtitle } from '@storybook/blocks';
-import { Token, baseTokens } from '../src/theme';
+import { Token, tokenDefaults } from '../src/theme';
 import '../src/dartbot-dartboard.ts';
 
 export const colorSample = (c) =>
@@ -8,8 +8,8 @@ export const colorSample = (c) =>
 export const tokenRow = (token, sample, description) => (
   <tr>
     <td>{token}</td>
-    <td>{baseTokens[token]}</td>
-    <td>{sample ? colorSample(baseTokens[token]) : ''}</td>
+    <td>{tokenDefaults[token]}</td>
+    <td>{sample ? colorSample(tokenDefaults[token]) : ''}</td>
     <td>{description} </td>
   </tr>
 );
