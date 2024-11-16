@@ -1,12 +1,24 @@
 <h1 align="center">&lt;dartbot-dartboard&gt; A Dartboard Web Component</h1>
 
-
 ![Dartboards rendered with different styles](https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/board_themes.JPG)
 
----
-
-<a href="https://docs.dartbot.com"><img style="width:1em" src="https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/favicon.svg" /> Storybook Docs</a><br />
-Source: [github.com/dartbotapp/dartboard](https://github.com/dartbotapp/dartboard)
+<div>
+  <a href="https://github.com/dartbotapp/dartboard" rel="noopener noreferrer" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat&amp;logo=github&amp;logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://docs.dartbot.com" rel="noopener noreferrer" target="_blank">
+    <img src="https://img.shields.io/badge/Docs-Website-232323.svg?style=flat" alt="Documentation" />
+  </a>
+  <a href="https://www.npmjs.com/package/@dartbot/dartboard" rel="noopener noreferrer" target="_blank">
+    <img src="https://img.shields.io/npm/dw/@dartbot/dartboard?label=npm&amp;style=flat" alt="npm" />
+  </a>
+  <a href="https://github.com/dartbotapp/dartboard/actions/workflows/publish.yml" rel="noopener noreferrer" target="_blank">
+    <img src="https://img.shields.io/github/actions/workflow/status/dartbotapp/dartboard/publish.yml" alt="GitHub Actions Workflow Status" />
+  </a>
+  <a href="https://github.com/dartbotapp/dartboard/blob/main/LICENSE" rel="noopener noreferrer" target="_blank">
+    <img src="https://img.shields.io/badge/license-MIT-232323.svg?style=flat" alt="License" />
+  </a>
+</div>
 
 ---
 
@@ -106,36 +118,38 @@ To run a local development server that serves the basic demo located in `demo/in
 
 
 ## ToDo
-* Styles
-  * ✅ Customize styles via CSS
-    * ✔️ Show wire
-    * ✔️ Wire shadow
-    * ✔️ Wire blur
-    * ✔️ Wire offset
-    * ✔️ Wire overhang
-    * ✔️ Wire inset
-    * ✔️ Show numbers
-  * ✅ Support standard CSS props
-    * ✔️ padding
-    * ✔️ margin
-    * ✔️ filters
-    * ✔️ transformations
-    * ✔️ zoom
-  * ✅ Resize
-* Hits✅
-* Alt board setups✅
-* Events
-  * hover
-  * click
-  * select
-  * drag
-  * touch
-* Pan and Zoom
-  * props
-  * mouse
-* Export as image
-* Npm build and publish
-* Unit tests
-* Build badges
-* Rotate board to match pi
-* Demo pages
+- [x] Styles
+  - [x] Customize w/ CSS
+  - [x] Show wire
+  - [x] Wire shadow
+  - [x] Wire blur
+  - [x] Wire offset
+  - [x] Wire overhang
+  - [x] Wire inset
+  - [x] Show numbers
+- [x] Support standard CSS props
+  - [x] Padding
+  - [x] Margin
+  - [x] Filters
+  - [x] Transformations
+  - [x] Zoom
+- [x] Resize
+- [x] Hits
+- [x] Alt board setups
+- [ ] Events
+  - [ ] Hover
+  - [x] Click
+  - [ ] Select
+  - [ ] Drag
+  - [ ] Touch
+- [ ] Pan and Zoom
+  - [ ] Props
+  - [ ] Mouse
+- [x] NPM publish
+- [x] Build badges
+- [ ] Accesibility
+- [ ] Performance
+- [ ] Export as image
+- [ ] Unit tests
+- [ ] Rotate board to match pi
+- [ ] Demo pages
