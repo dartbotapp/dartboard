@@ -1,4 +1,3 @@
-import { clearBoard, drawBoard, drawHits, setContext } from './draw-board';
 import {
   translateCoords,
   debounce,
@@ -6,8 +5,9 @@ import {
   getPolar,
   Board,
 } from './utils';
-import { Token, baseTokens, themeBuilder } from './theme';
+import { Token, tokenDefaults, createTheme } from './theme';
 import { getRingIndexFromPoint, getSectorIndexFromPoint } from './utils/board';
+import { render } from './draw-board/render';
 
 /**
  * Custom pointer event that includes additional detail about what section
@@ -42,7 +42,7 @@ const DEFAULT_ZOOM = 0;
 export class Dartboard extends HTMLElement {
   #resizeObserver: ResizeObserver;
 
-  #canvas!: HTMLCanvasElement;
+  #canvas: HTMLCanvasElement;
 
   #hits: PolarPoint[] = [];
 
@@ -136,11 +136,13 @@ export class Dartboard extends HTMLElement {
       }
       canvas {
         position: absolute;
-        background: var(${Token.canvasBg}, ${baseTokens[Token.canvasBg]});
+        background: var(${Token.canvasBg}, ${tokenDefaults[Token.canvasBg]});
       }
       </style>
       <canvas></canvas>
     `;
+    this.#shadow.appendChild(this.#template.content.cloneNode(true));
+    this.#canvas = this.#shadow.querySelector('canvas')!;
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -165,14 +167,7 @@ export class Dartboard extends HTMLElement {
 
   connectedCallback() {
     this.#resizeObserver.observe(this, { box: 'device-pixel-content-box' });
-    const content = this.#template.content.cloneNode(true);
-    this.#shadow.appendChild(content);
-    this.#canvas = this.#shadow.querySelector('canvas')!;
     this.#canvas.addEventListener('click', this);
-  }
-
-  renderCallback() {
-    this.#render();
   }
 
   disconnectedCallback() {
@@ -217,41 +212,26 @@ export class Dartboard extends HTMLElement {
   }
 
   #render() {
-    const canvas = this.#shadow.querySelector('canvas')!;
-    if (canvas == null) {
-      return;
-    }
-    const ctx = canvas.getContext('2d');
+    const ctx = this.#canvas.getContext('2d');
     if (ctx == null) {
       return;
     }
 
-    const board = this.#board;
     const params = {
       zoom: this.#zoom,
       centerPoint: this.#centerPoint,
       fit: this.fit,
     };
     const style = getComputedStyle(this);
-    const theme = themeBuilder(style);
-
-    ctx.save();
-    clearBoard(ctx);
-    setContext(board, params, ctx);
-    drawBoard(board, theme, ctx);
-    drawHits(theme, ctx, this.#hits);
-    ctx.restore();
-  }
-
-  forceRender() {
-    this.#render();
+    const theme = createTheme(style);
+    render(this.#board, this.#hits, theme, params, ctx);
   }
 
   /**
-   * Translates a point from the coordinate system the canvas uses to match
-   * dimensions the board functions work with. The point is adjusted so that
-   * 0,0 is the center of the board with the y-axis pointing up. The units
-   * are translated from pixels to millimeters relative to the board radius.
+   * Translates a point from the coordinate system of the canvas.
+   * The point is adjusted so that 0,0 is the center of the board with
+   * the y-axis pointing up. The units are translated from pixels to
+   * millimeters relative to the board radius.
    * @param x - X coordinate in canvas space
    * @param y - Y coordinate in canvas space
    */
