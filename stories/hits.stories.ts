@@ -28,8 +28,8 @@ export const Hits: Story = {
   tags: ['hidden'],
   parameters: {
     aspectRatio: '16/9',
-    zoom: 1.5,
-    center: '{ radius: 140, angle: 0.157 }',
+    zoom: 2,
+    center: '{ radius: 140, angle: 1.57 }',
   },
   render: (_, { id }) => `
 <style data-dartbot-remove>
@@ -53,20 +53,21 @@ export const Hits: Story = {
     const root = document.getElementById('${id}');
     const board = root.querySelector('dartbot-dartboard');
     board.hits = [
-      { radius: 147, angle: 0.2595 },
-      { radius: 149, angle: 0.1368 },
-      { radius: 142, angle: 0.0978 },
-      { radius: 138, angle: 0.1136 },
-      { radius: 138, angle: 0.1832 },
-      { radius: 118, angle: 0.1978 },
-      { radius: 120, angle: 0.1121 },
-      { radius: 107, angle: 0.7388 },
-      { radius: 105, angle: 0.6335 },
-      { radius: 100, angle: 0.7349 },
-      { radius: 102, angle: 0.7156 },
-      { radius: 103, angle: 0.8145 },
-      { radius: 100, angle: 0.8636 },
-      { radius: 105, angle: 0.8737 }
+      {radius: 144, angle: 1.66 },
+      {radius: 143, angle: 1.54 },
+      {radius: 150, angle: 1.50 },
+      {radius: 128, angle: 1.55 },
+      {radius: 131, angle: 1.62 },
+      {radius: 135, angle: 1.51 },
+      {radius: 147, angle: 1.57 },
+      {radius: 104, angle: 0.57 },
+      {radius: 97, angle: 0.60 },
+      {radius: 100, angle: 0.54 },
+      {radius: 107, angle: 0.68 },
+      {radius: 97, angle: 0.69 },
+      {radius: 103, angle: 0.74 },
+      {radius: 102, angle: 0.66 },
+      {radius: 104, angle: 0.57 }
     ];
   })();
 </script>

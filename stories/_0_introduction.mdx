@@ -25,20 +25,29 @@ import '../src/dartbot-dartboard.ts';
 
 <style>
 {`
-  #intro-goals {
+  #intro {
     display: flex;
-    flex-direction: row;
-
-    & > div {
-      flex-basis: 0;
-      flex-grow: 1;
+  }
+  .intro-img {
+    min-width: 20em;
+    display:flex;
+    flex-basis: 50%;
+  }
+  .intro-goals {
+    min-width: 30em;
+    flex-basis: 50%;
+  }
+  @media screen and (max-width: 1280px) {
+    #intro {
+      display: block;
     }
   }
 `}
+
 </style>
 
-<div id="intro-goals">
-  <div style={{ 'paddingRight': '4em '}}>
+<div id="intro">
+  <div className="intro-goals" style={{ 'paddingRight': '4em '}}>
     <br />
     ## Design Goals
 
@@ -66,7 +75,7 @@ import '../src/dartbot-dartboard.ts';
     🕹️ **Interactivity**
     Support user interactivity features including touch input, hover, selection, highlighting, and clicking.
   </div>
-  <div>
+  <div className="intro-img">
     <dartbot-dartboard></dartbot-dartboard>
   </div>
 </div>

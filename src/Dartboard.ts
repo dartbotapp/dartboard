@@ -5,7 +5,7 @@ import {
   getPolar,
   Board,
 } from './utils';
-import { Token, tokenDefaults, createTheme } from './theme';
+import { createTheme, Token } from './theme';
 import { getRingIndexFromPoint, getSectorIndexFromPoint } from './utils/board';
 import { render } from './draw-board/render';
 
@@ -40,8 +40,6 @@ const RESIZE_DEBOUNCE_MS = 100;
 const DEFAULT_ZOOM = 0;
 
 export class Dartboard extends HTMLElement {
-  #resizeObserver: ResizeObserver;
-
   #canvas: HTMLCanvasElement;
 
   #hits: PolarPoint[] = [];
@@ -52,13 +50,9 @@ export class Dartboard extends HTMLElement {
 
   #centerPoint = { radius: 0, angle: 0 };
 
-  #template: HTMLTemplateElement;
-
   #shadow: ShadowRoot;
 
   #board: Board.Board;
-
-  debounceRender: any;
 
   get board(): Board.Board {
     return this.#board;
@@ -66,7 +60,7 @@ export class Dartboard extends HTMLElement {
 
   set board(value: Board.Board) {
     this.#board = value;
-    this.#render();
+    this.render();
   }
 
   get zoom(): number {
@@ -75,7 +69,7 @@ export class Dartboard extends HTMLElement {
 
   set zoom(value: number) {
     this.#zoom = value;
-    this.#render();
+    this.render();
   }
 
   get centerPoint(): PolarPoint {
@@ -84,7 +78,7 @@ export class Dartboard extends HTMLElement {
 
   set centerPoint(value: PolarPoint) {
     this.#centerPoint = value;
-    this.#render();
+    this.render();
   }
 
   get hits(): PolarPoint[] {
@@ -93,7 +87,7 @@ export class Dartboard extends HTMLElement {
 
   set hits(value: PolarPoint[]) {
     this.#hits = value;
-    this.#render();
+    this.render();
   }
 
   get fit(): string {
@@ -102,7 +96,7 @@ export class Dartboard extends HTMLElement {
 
   set fit(value: string) {
     this.#fit = value;
-    this.#render();
+    this.render();
   }
 
   static get observedAttributes() {
@@ -113,36 +107,43 @@ export class Dartboard extends HTMLElement {
     super();
 
     this.#board = Board.create();
-    this.debounceRender = debounce(
-      (dw: number, dh: number) => {
-        this.#canvas.width = dw;
-        this.#canvas.height = dh;
-        this.#render();
-      },
-      RESIZE_DEBOUNCE_MS,
-      { leading: true, trailing: true },
-    );
-    this.#resizeObserver = new ResizeObserver(this.#resize.bind(this));
     this.#shadow = this.attachShadow({ mode: 'open' });
-    this.#template = document.createElement('template');
-    this.#template.innerHTML = `
+    this.#shadow.innerHTML = `
       <style>
-      :host {
-        display: block;
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        box-sizing: border-box;
-        user-select: none;
-      }
-      canvas {
-        position: absolute;
-        background: var(${Token.canvasBg}, ${tokenDefaults[Token.canvasBg]});
-      }
+        :host {
+          display: flex;
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          box-sizing: border-box;
+          user-select: none;
+        }
+        canvas {
+          width: 100%;
+          height: 100%;
+          background-color: var(${Token.canvasBg}, transparent);
+        }
       </style>
       <canvas></canvas>
     `;
-    this.#shadow.appendChild(this.#template.content.cloneNode(true));
     this.#canvas = this.#shadow.querySelector('canvas')!;
+    this.#canvas.addEventListener('click', this);
+
+    const resizeObserver = new ResizeObserver(
+      debounce(
+        (entries: ResizeObserverEntry[]) => {
+          const entry = entries.find(e => e.target === this)!;
+          const box = entry.devicePixelContentBoxSize?.[0];
+          const boxC = entry.contentBoxSize[0];
+          const physical = (n: number) => Math.round(n * devicePixelRatio);
+          this.#canvas.width = box?.inlineSize ?? physical(boxC.inlineSize);
+          this.#canvas.height = box?.blockSize ?? physical(boxC.blockSize);
+          this.render();
+        },
+        RESIZE_DEBOUNCE_MS,
+        { leading: true, trailing: true },
+      ),
+    );
+    resizeObserver.observe(this, { box: 'content-box' });
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -163,16 +164,6 @@ export class Dartboard extends HTMLElement {
     } else if (name === 'fit') {
       this.fit = newValue;
     }
-  }
-
-  connectedCallback() {
-    this.#resizeObserver.observe(this, { box: 'device-pixel-content-box' });
-    this.#canvas.addEventListener('click', this);
-  }
-
-  disconnectedCallback() {
-    this.#resizeObserver.disconnect();
-    this.#canvas.removeEventListener('click', this);
   }
 
   handleEvent(event: Event) {
@@ -200,31 +191,17 @@ export class Dartboard extends HTMLElement {
     }
   }
 
-  #resize(entries: ResizeObserverEntry[]) {
-    for (const entry of entries) {
-      const dw = entry.devicePixelContentBoxSize[0].inlineSize;
-      const dh = entry.devicePixelContentBoxSize[0].blockSize;
-      const cr = entry.contentRect;
-      this.#canvas.style.width = `${cr.width}px`;
-      this.#canvas.style.height = `${cr.height}px`;
-      this.debounceRender(dw, dh);
-    }
-  }
-
-  #render() {
+  render() {
     const ctx = this.#canvas.getContext('2d');
     if (ctx == null) {
       return;
     }
-
-    const params = {
-      zoom: this.#zoom,
-      centerPoint: this.#centerPoint,
-      fit: this.fit,
-    };
+    const zoom = this.#zoom;
+    const center = this.#centerPoint;
+    const fit = this.#fit;
     const style = getComputedStyle(this);
     const theme = createTheme(style);
-    render(this.#board, this.#hits, theme, params, ctx);
+    render(this.#board, zoom, center, fit, this.#hits, theme, ctx);
   }
 
   /**
@@ -236,20 +213,12 @@ export class Dartboard extends HTMLElement {
    * @param y - Y coordinate in canvas space
    */
   translatePoint(x: number, y: number) {
-    const { offsetWidth, offsetHeight } = this.#canvas;
-    const sectors = this.#board.sectors.length;
+    const { offsetWidth: w, offsetHeight: h } = this.#canvas;
     const { radius } = this.#board;
-    const point = translateCoords(
-      offsetWidth,
-      offsetHeight,
-      this.#zoom,
-      this.#centerPoint,
-      radius,
-      sectors,
-      this.fit,
-      x,
-      y,
-    );
+    const zoom = this.#zoom;
+    const center = this.#centerPoint;
+    const fit = this.#fit;
+    const point = translateCoords(w, h, zoom, center, radius, fit, x, y);
     const polar = getPolar(point.x, point.y);
     const sector = getSectorIndexFromPoint(this.#board, polar);
     const ring = getRingIndexFromPoint(this.#board, polar);

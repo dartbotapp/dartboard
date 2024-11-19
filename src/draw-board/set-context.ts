@@ -1,13 +1,4 @@
-import { Board, isValidPolar, getPoint, PolarPoint } from '../utils';
-
-export const DEFAULT_ZOOM = 0;
-export const DEFAULT_CENTER_POINT = { radius: 0, angle: 0 };
-
-export interface BoardParams {
-  zoom?: number;
-  centerPoint?: PolarPoint;
-  fit: string;
-}
+import { isValidPolar, getPoint, PolarPoint } from '../utils';
 
 /**
  * Set the scale and rotation of the canvas to match the dimensions
@@ -15,46 +6,44 @@ export interface BoardParams {
  * and units will be in millimeters. This allows us to draw the board
  * using coordinates that match the physical board.
  * @param radius The radius of the board in millimeters
- * @param sectors The number of sectors on the board
- * @param context Canvas rendering context to draw the board to
- * @param zoom Zoom level of the board. 0 is normal, negative zooms out, positive zooms in
+ * @param zoom Zoom level of the board. 1 is normal
  * @param centerPoint Point on the board that the canvas should be centered on
+ * @param fit How the board should fit in the canvas. 'contain' or 'cover'
+ * @param context Canvas rendering context to draw the board to
  */
 export const setContext = (
-  board: Board.Board,
-  params: BoardParams,
+  radius: number,
+  zoom: number,
+  centerPoint: PolarPoint,
+  fit: string,
   context: CanvasRenderingContext2D,
 ) => {
   if (context == null) {
     return;
   }
-  const { radius } = board;
-  const sectors = board.sectors.length;
-  const zoom = params.zoom ?? DEFAULT_ZOOM;
-  const centerPoint = params.centerPoint ?? DEFAULT_CENTER_POINT;
   const width = context.canvas?.width;
   const height = context.canvas?.height;
 
   // Set the bulleye to center of canvas (0,0)
   context.translate(width / 2, height / 2);
 
-  // Set rotation so X axis is the start of first sector
-  const sectorWidth = sectors ? (2 * Math.PI) / sectors : 0;
-  context.rotate(-(Math.PI / 2 + sectorWidth / 2));
+  // Flip the y-axis to point up
+  context.scale(1, -1);
 
-  // Set the scale so that the board exactly fills
-  // the canvas then adjust the zoom level
-  let z = Math.abs(zoom) + 1;
-  if (zoom < 0) {
-    z **= -1;
+  // Set the scale so that the board exactly fills the canvas
+  const fitMode = fit === 'cover' ? Math.max : Math.min;
+  const fitVal = fitMode(width, height);
+  const fitScale = fitVal / (radius * 2.0);
+  context.scale(fitScale, fitScale);
+
+  // Set the zoom level
+  let zoomVal = zoom;
+  if (zoomVal <= 0) {
+    zoomVal = 1;
   }
-
-  const fitMax = () => Math.max(width, height);
-  const fitMin = () => Math.min(width, height);
-  const fitMode = params.fit === 'cover' ? fitMax : fitMin;
-  const fit = fitMode();
-  const scale = (fit / (radius * 2.0)) * z;
-  context.scale(scale, scale);
+  if (zoomVal !== 1) {
+    context.scale(zoomVal, zoomVal);
+  }
 
   // If the user has specified a different center point,
   // translate the canvas so it is at the the center

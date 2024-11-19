@@ -53,7 +53,7 @@ export const ColorWall: StoryObj = {
       // Change color on clicked
       board.addEventListener('mouseover', () => {
         board.style.setProperty('--dartbot-color', '${color3}');
-        board.forceRender();
+        board.render();
       });
     });
   });

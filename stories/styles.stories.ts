@@ -196,8 +196,8 @@ export const WireRingOffset: Story = {
   tags: ['hidden'],
   parameters: {
     aspectRatio: '16/9',
-    zoom: 3,
-    center: '{ radius: 170, angle: 0.157 }',
+    zoom: 4,
+    center: '{ radius: 170, angle: 1.57 }',
   },
   render: (_, { id }) => `
 <style>
@@ -236,7 +236,6 @@ export const NumberShow: Story = {
     dartbot-dartboard:nth-child(2) {
       --dartbot-number-show: 1;
       --dartbot-number-wire-show: 0;
-      --dartbot-number-inset: 25;
     }
     dartbot-dartboard:nth-child(3) {
       --dartbot-number-show: 0;
@@ -258,19 +257,19 @@ export const NumberInset: Story = {
   parameters: {
     aspectRatio: '16/9',
     zoom: 3,
-    center: '{ radius: 170, angle: 0.157 }',
+    center: '{ radius: 170, angle: 1.57 }',
   },
   render: (_, { id }) => `
 <style>
   #${id} {
     dartbot-dartboard:nth-child(1) {
-      --dartbot-number-inset: 5;
+      --dartbot-number-inset: 0;
     }
     dartbot-dartboard:nth-child(2) {
       --dartbot-number-inset: 10;
     }
     dartbot-dartboard:nth-child(3) {
-      --dartbot-number-inset: 25;
+      --dartbot-number-inset: 30;
     }
   }
 </style>

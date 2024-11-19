@@ -22,35 +22,33 @@ export const drawWire = (
     }
 
     // Ring wires
-    // First 2 rings are the bullseye
     for (let r = 2; r < board.rings.length; r += 1) {
-      const adjust = theme.wireWidth * 0.5;
       context.beginPath();
-      context.arc(0, 0, board.rings[r] + adjust, 0, PI2, false);
+      context.arc(0, 0, board.rings[r], 0, PI2, false);
       context.stroke();
     }
 
     // Sector wires
     const sectorWidth = PI2 / board.sectors.length;
+    context.rotate(PI2 / 4 + sectorWidth / 2);
     const lastRing = board.rings[board.rings.length - 1];
-    const radius = lastRing + theme.wireRingOffset;
-    const start = { angle: 0, radius: board.rings[1] };
-    context.save();
+    const randiusStart = board.rings[1];
+    const radiusEnd = lastRing + theme.wireRingOffset;
     for (let s = 0; s < board.sectors.length; s += 1) {
       context.beginPath();
-      context.rotate(sectorWidth);
-      context.moveTo(0, start.radius);
-      context.lineTo(0, radius);
+      context.moveTo(randiusStart, 0);
+      context.lineTo(radiusEnd, 0);
       context.stroke();
+      context.rotate(-sectorWidth);
     }
-    context.restore();
 
-    // Bullseye wires
+    // Bull wires
     for (let r = 0; r < 2; r += 1) {
       context.beginPath();
-      context.arc(0, 0, board.rings[r] + theme.wireWidth / 2, 0, PI2, false);
+      context.arc(0, 0, board.rings[r], 0, PI2, false);
       context.stroke();
     }
+
     context.restore();
   }
 

@@ -34,7 +34,6 @@ const config: StorybookConfig = {
         sidebar: {
           filters: {
             patterns: item => {
-              console.log('hidden');
               return !item?.tags?.includes('hidden');
             },
           },
@@ -55,7 +54,6 @@ addons.setConfig({
   sidebar: {
     filters: {
       patterns: item => {
-        console.log('hidden');
         return !item?.tags?.includes('hidden');
       },
     },

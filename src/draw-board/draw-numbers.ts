@@ -1,6 +1,8 @@
 import { Theme } from '../theme';
 import { Board } from '../utils';
 
+const PI2 = Math.PI * 2;
+
 export const drawNumbers = (
   board: Board.Board,
   theme: Theme,
@@ -23,15 +25,17 @@ const drawNumber = (
   context.save();
 
   context.lineWidth = theme.numberWidth;
-  const { numberColor, numberFont } = theme;
+  const { numberColor, numberFont, numberSize } = theme;
   context.fillStyle = numberColor;
-  context.font = numberFont;
+  context.font = `${numberSize}px ${numberFont}`;
 
   // Rotate the canvas until we get to the correct sector
   const { sectors } = board;
-  const sectorWidth = Board.getSectorWidth(board);
-  const sectorAngle = (i + 0.5) * sectorWidth;
-  context.rotate(sectorAngle);
+  const sectorWidth = (Math.PI * 2) / sectors.length;
+  const start = PI2 / 4 + sectorWidth / 2;
+  const sectorStart = start - sectorWidth * i;
+  const numberStart = sectorStart - sectorWidth / 2;
+  context.rotate(numberStart);
 
   // Measure the text to position it in the center of the sector
   const text = sectors[i];
@@ -52,6 +56,8 @@ const drawNumber = (
   const adjust = a > Math.PI / 2 && a < 2 * Math.PI * 0.75 ? 1 : 0;
   const numAngle = Math.PI / 2 + adjust * Math.PI;
   context.rotate(numAngle);
-  context.fillText(sectors[i].toString(), -(textWidth / 2), textHeight / 2);
+  context.scale(-1, 1);
+  const label = sectors[i].toString();
+  context.fillText(label, -(textWidth / 2), textHeight / 2);
   context.restore();
 };

@@ -1,7 +1,7 @@
 export interface Theme {
   canvasBackground: string;
   boardBackground: string;
-  sectorColor: string[][];
+  sectorBackground: string[];
   wireShow: boolean;
   wireWidth: number;
   wireColor: string;
@@ -15,6 +15,7 @@ export interface Theme {
   numberWidth: number;
   numberColor: string;
   numberFont: string;
+  numberSize: number;
   numberInset: number;
   numberWireShow: boolean;
   numberWireWidth: number;

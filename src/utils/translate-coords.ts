@@ -1,49 +1,56 @@
-import { DEFAULT_CENTER_POINT, DEFAULT_ZOOM } from '../draw-board';
 import { PolarPoint, getPoint } from './polar-point';
 
+/**
+ * Translate a point from canvas coordinates to board coordinates.
+ * Correct for the scale and rotation of the canvas so that the
+ * point is in the same coordinate system as the dartboard.
+ * @param width Width of the canvas
+ * @param height Height of the canvas
+ * @param zoomVal Zoom value of the component
+ * @param centerPoint Center point offset of the component
+ * @param radius Radius of the dartboard
+ * @param fit Fit mode of the component
+ * @param xCoord X coordinate to translate
+ * @param yCoord Y coordinate to translate
+ */
 export const translateCoords = (
   width: number,
   height: number,
   zoomVal: number,
   centerPoint: PolarPoint,
   radius: number,
-  sectors: number,
   fit: string,
-  x: number,
-  y: number,
+  xCoord: number,
+  yCoord: number,
 ) => {
   // Correct for the center of the canvas
-  const x1 = x - width / 2;
-  const y1 = y - height / 2;
+  let x = xCoord;
+  let y = yCoord;
+  x -= width / 2;
+  y -= height / 2;
+
+  // Correct for the y-axis
+  y *= -1;
+
+  // Correct for fit
+  const fitMode = fit === 'cover' ? Math.max : Math.min;
+  const fitFactor = fitMode(width, height);
+  const fitScale = fitFactor / (radius * 2.0);
+  x /= fitScale;
+  y /= fitScale;
 
   // Correct for zoom
-  const zoom = zoomVal ?? DEFAULT_ZOOM;
-  let z = Math.abs(zoom) + 1;
-  if (zoom < 0) {
-    z **= -1;
+  let zoom = zoomVal;
+  if (zoom <= 0) {
+    zoom = 1;
   }
-  const f = fit === 'cover' ? Math.max(width, height) : Math.min(width, height);
-  const scale = (f / (radius * 2)) * z;
-  const x3 = x1 / scale;
-  const y3 = y1 / scale;
-
-  // Correct for rotation
-  const sectorWidth = (2 * Math.PI) / sectors;
-  const radians = Math.PI / 2 + sectorWidth / 2;
-  const cos = Math.cos(radians);
-  const sin = Math.sin(radians);
-  const point = {
-    x: x3 * cos - y3 * sin,
-    y: x3 * sin + y3 * cos,
-  };
+  x /= zoom;
+  y /= zoom;
 
   // Correct for center point
-  const center = centerPoint ?? DEFAULT_CENTER_POINT;
-  const offset = getPoint(center);
-  const x4 = point.x + offset.x;
-  const y4 = point.y + offset.y;
-  point.x = x4;
-  point.y = y4;
+  const center = getPoint(centerPoint);
+  x += center.x;
+  y += center.y;
 
-  return point;
+  return { x, y };
 };

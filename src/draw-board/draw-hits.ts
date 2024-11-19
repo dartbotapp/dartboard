@@ -6,6 +6,7 @@ export const drawHits = (
   context: CanvasRenderingContext2D,
   hits: PolarPoint[],
 ) => {
+  context.save();
   context.fillStyle = theme.hitFillColor;
   context.strokeStyle = theme.hitStokeColor;
   context.lineWidth = theme.hitStrokeWidth;
@@ -17,4 +18,5 @@ export const drawHits = (
     context.fill();
     context.stroke();
   }
+  context.restore();
 };

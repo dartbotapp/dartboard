@@ -1,5 +1,7 @@
 import { PolarPoint } from './polar-point';
 
+const PI2 = Math.PI * 2;
+
 export interface Board {
   radius: number;
   rings: number[];
@@ -105,7 +107,10 @@ export const getSectorIndexFromPoint = (
   const { sectors } = board;
   const sectorLength = sectors.length;
   const sectorWidth = (Math.PI * 2) / sectorLength;
-  const sectorIndex = Math.floor(p.angle / sectorWidth);
+  // const angle = p.angle - (Math.PI / 2) + (sectorWidth / 2);
+  let angle = PI2 - (p.angle % PI2);
+  angle += Math.PI / 2 + sectorWidth / 2;
+  const sectorIndex = Math.floor(angle / sectorWidth);
   const i = sectorIndex % sectorLength;
   return i;
 };

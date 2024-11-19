@@ -3,13 +3,15 @@ import { Board, PolarPoint } from '../utils';
 import { clearBoard } from './clear-board';
 import { drawBoard } from './draw-board';
 import { drawHits } from './draw-hits';
-import { BoardParams, setContext } from './set-context';
+import { setContext } from './set-context';
 
 export const render = (
   board: Board.Board,
+  zoom: number,
+  center: PolarPoint,
+  fit: string,
   hits: PolarPoint[],
   theme: Theme,
-  params: BoardParams,
   context: CanvasRenderingContext2D,
 ) => {
   if (context == null) {
@@ -18,7 +20,7 @@ export const render = (
 
   context.save();
   clearBoard(context);
-  setContext(board, params, context);
+  setContext(board.radius, zoom, center, fit, context);
   drawBoard(board, theme, context);
   drawHits(theme, context, hits);
   context.restore();
