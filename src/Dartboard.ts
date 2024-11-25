@@ -1,12 +1,11 @@
-import {
-  translateCoords,
-  debounce,
-  PolarPoint,
-  getPolar,
-  Board,
-} from './utils';
 import { createTheme, Token } from './theme';
-import { getRingIndexFromPoint, getSectorIndexFromPoint } from './utils/board';
+import { translateCoords, debounce, PolarPoint, getPolar } from './utils';
+import {
+  Board,
+  createBoard,
+  getRingIndexFromPoint,
+  getSectorIndexFromPoint,
+} from './draw-board/board';
 import { render } from './draw-board/render';
 
 /**
@@ -52,13 +51,13 @@ export class Dartboard extends HTMLElement {
 
   #shadow: ShadowRoot;
 
-  #board: Board.Board;
+  #board: Board;
 
-  get board(): Board.Board {
+  get board(): Board {
     return this.#board;
   }
 
-  set board(value: Board.Board) {
+  set board(value: Board) {
     this.#board = value;
     this.render();
   }
@@ -106,7 +105,7 @@ export class Dartboard extends HTMLElement {
   constructor() {
     super();
 
-    this.#board = Board.create();
+    this.#board = createBoard();
     this.#shadow = this.attachShadow({ mode: 'open' });
     this.#shadow.innerHTML = `
       <style>

@@ -1,4 +1,4 @@
-import { PolarPoint } from './polar-point';
+import { PolarPoint } from '../utils/polar-point';
 
 const PI2 = Math.PI * 2;
 
@@ -8,7 +8,7 @@ export interface Board {
   sectors: number[];
 }
 
-export const create = () => ({
+export const createBoard = () => ({
   radius: 225,
   rings: [
     6.35, // Double Bull

@@ -21,10 +21,10 @@ export const setContext = (
   if (context == null) {
     return;
   }
-  const width = context.canvas?.width;
-  const height = context.canvas?.height;
 
   // Set the bulleye to center of canvas (0,0)
+  const width = context.canvas?.width;
+  const height = context.canvas?.height;
   context.translate(width / 2, height / 2);
 
   // Flip the y-axis to point up
@@ -37,12 +37,12 @@ export const setContext = (
   context.scale(fitScale, fitScale);
 
   // Set the zoom level
-  let zoomVal = zoom;
-  if (zoomVal <= 0) {
-    zoomVal = 1;
+  let zoomScale = zoom;
+  if (zoomScale <= 0) {
+    zoomScale = 1;
   }
-  if (zoomVal !== 1) {
-    context.scale(zoomVal, zoomVal);
+  if (zoomScale !== 1) {
+    context.scale(zoomScale, zoomScale);
   }
 
   // If the user has specified a different center point,

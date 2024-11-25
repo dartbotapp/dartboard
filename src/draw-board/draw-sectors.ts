@@ -1,6 +1,6 @@
 /* eslint-disable prefer-destructuring */
 import { Theme } from '../theme';
-import { Board } from '../utils';
+import { Board } from './board';
 
 const PI2 = Math.PI * 2;
 
@@ -11,7 +11,7 @@ const PI2 = Math.PI * 2;
  * @param context HTML canvas context to draw to
  */
 export const drawSectors = (
-  board: Board.Board,
+  board: Board,
   theme: Theme,
   context: CanvasRenderingContext2D,
 ) => {
@@ -46,7 +46,7 @@ export const drawSectors = (
 };
 
 const drawSector = (
-  board: Board.Board,
+  board: Board,
   theme: Theme,
   context: CanvasRenderingContext2D,
   s: number,

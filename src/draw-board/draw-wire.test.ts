@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import sinon, { assert } from 'sinon';
+import sinon from 'sinon';
 import { drawWire } from './draw-wire';
-import { Board } from '../utils';
+import { createBoard } from './board';
 import { Theme } from '../theme';
 
 describe('drawWire', () => {
-  const board = Board.create();
+  const board = createBoard();
   const save = sinon.stub();
   const beginPath = sinon.stub();
   const arc = sinon.stub();

@@ -1,10 +1,10 @@
 import { Theme } from '../theme';
-import { Board } from '../utils';
+import { Board } from './board';
 
 const PI2 = Math.PI * 2;
 
 export const drawWire = (
-  board: Board.Board,
+  board: Board,
   theme: Theme,
   context: CanvasRenderingContext2D,
 ) => {

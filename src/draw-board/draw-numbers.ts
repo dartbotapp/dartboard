@@ -1,10 +1,10 @@
 import { Theme } from '../theme';
-import { Board } from '../utils';
+import { Board } from './board';
 
 const PI2 = Math.PI * 2;
 
 export const drawNumbers = (
-  board: Board.Board,
+  board: Board,
   theme: Theme,
   context: CanvasRenderingContext2D,
 ) => {
@@ -18,7 +18,7 @@ export const drawNumbers = (
 
 const drawNumber = (
   context: CanvasRenderingContext2D,
-  board: Board.Board,
+  board: Board,
   theme: Theme,
   i: number,
 ) => {

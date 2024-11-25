@@ -1,6 +1,12 @@
 import { Theme } from '../theme';
 import { PolarPoint, getPoint } from '../utils';
 
+/**
+ * Draw hits as highlighted circles on the board
+ * @param theme
+ * @param context
+ * @param hits
+ */
 export const drawHits = (
   theme: Theme,
   context: CanvasRenderingContext2D,
