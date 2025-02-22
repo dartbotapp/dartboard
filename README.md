@@ -1,4 +1,4 @@
-<h1 align="center">&lt;dartbot-dartboard&gt; A Dartboard Web Component</h1>
+<h1>&lt;dartbot-dartboard&gt; A Dartboard Web Component</h1>
 
 ![Dartboards rendered with different styles](https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/board_themes.JPG)
 
@@ -14,7 +14,12 @@
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
-# Design Goals
+<h3><a href="https://docs.dartbot.com"><img style="width:.9em;margin-right:.2em" src="https://raw.githubusercontent.com/dartbotapp/dartboard/refs/heads/main/storybook-public/storybook.svg">Storybook Documentation</</a></h3>
+
+- **Demo** - For a <a href="https://docs.darbot.com">live demo</a> visit the Storybook docs</a>
+- <a href="https://medium.com/p/0fee96256bf4">Tutorial and walkthrough</a> on Medium
+
+## Design Goals
 
 🎨 **HTML Canvas** Render using HTMLCanvas
 
