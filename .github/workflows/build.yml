@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+permissions:
+  id-token: write
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,8 +32,10 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          role-session-name: session-deploy-segment
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Sts GetCallerIdentity
+        run: aws sts get-caller-identity
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./storybook-static/ s3://docs.dartbot.com/test/dartboard --delete
+        run: aws s3 cp ./storybook-static/ s3://${{secrets.AWS_BUCKET}}/test/dartboard --recursive

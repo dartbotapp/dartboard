@@ -1,9 +1,9 @@
 {
   "name": "@dartbot/dartboard",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "Dartboard implemented as a vanilla web component",
   "keywords": ["dartbot", "dartboard", "web component", "canvas"],
-  "homepage": "https://docs.dartbot.com",
+  "homepage": "https://docs.dartbot.com/dartboard",
   "repository": {
     "type": "git",
     "url": "https://github.com/dartbotapp/dartboard.git"

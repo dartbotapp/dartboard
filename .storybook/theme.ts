@@ -8,7 +8,7 @@ export default create({
   fontCode: 'monospace',
 
   brandTitle: 'Dartbot UI',
-  brandUrl: 'https://docs.dartbot.com',
+  brandUrl: 'https://docs.dartbot.com/dartboard',
   brandImage: 'logo_title.png',
   brandTarget: '_self',
 
