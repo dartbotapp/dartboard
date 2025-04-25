@@ -1,0 +1,32 @@
+import { Meta, Canvas, Title, Subtitle } from '@storybook/blocks';
+import * as ExportStories from './export.stories';
+
+<Meta title="Export" name="Export" />
+
+<Title>Export Image</Title>
+<Subtitle>Export the image as a PNG or JPEG using one of the following API calls.</Subtitle>
+
+### To Data Url
+Get the image as a data URL. This can be used to display the image in an `<img>` tag or download it.
+```javascript
+/*
+ * Return the image data encoded as a data URL.
+ * @param type The image format. Default is `image/png`.npm
+ * @param quality The image quality. Default is `1.0`.
+ */
+toDataURL(type?: string, quality?: number): string
+```
+
+<Canvas of={ExportStories.ExportUrl} />
+
+### To Blob
+Get the image as a blob. This can be used to download the image or upload it to a server.
+```javascript
+/**
+ * Return the image data as a Blob.
+ * @param type The image format. Default is `image/png`.
+ * @param quality The image quality. Default is `1.0`.
+ */
+toBlob(type?: string, quality?: number): Promise<Blob>
+```
+<Canvas of={ExportStories.ExportBlob} />

@@ -223,4 +223,30 @@ export class Dartboard extends HTMLElement {
     const ring = getRingIndexFromPoint(this.#board, polar);
     return { point, polar, sector, ring };
   }
+
+  /**
+   * Return the image data encoded as a data URL.
+   * @param type The image format. Default is `image/png`.
+   * @param quality The image quality. Default is `1.0`.
+   */
+  toDataURL(type?: string, quality?: number): string {
+    return this.#canvas.toDataURL(type, quality);
+  }
+
+  /**
+   * Return the image data as a Blob.
+   * @param type The image format. Default is `image/png`.
+   * @param quality The image quality. Default is `1.0`.
+   */
+  toBlob(type?: string, quality?: number): Promise<Blob> {
+    return new Promise<Blob>(resolve => {
+      this.#canvas.toBlob(
+        blob => {
+          resolve(blob!);
+        },
+        type,
+        quality,
+      );
+    });
+  }
 }
