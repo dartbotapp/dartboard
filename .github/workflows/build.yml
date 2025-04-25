@@ -38,4 +38,4 @@ jobs:
       - name: Sts GetCallerIdentity
         run: aws sts get-caller-identity
       - name: Deploy static site to S3 bucket
-        run: aws s3 cp ./storybook-static/ s3://${{secrets.AWS_BUCKET}}/test/dartboard --recursive
+        run: aws s3 cp ./storybook-static/ s3://${{secrets.AWS_DOCS_BUCKET}}/test/dartboard --recursive
