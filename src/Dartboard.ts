@@ -126,6 +126,8 @@ export class Dartboard extends HTMLElement {
     `;
     this.#canvas = this.#shadow.querySelector('canvas')!;
     this.#canvas.addEventListener('click', this);
+    this.#canvas.addEventListener('pointerdown', this);
+    this.#canvas.addEventListener('pointerup', this);
 
     const resizeObserver = new ResizeObserver(
       debounce(
