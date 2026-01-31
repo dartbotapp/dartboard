@@ -1,8 +1,13 @@
 {
   "name": "@dartbot/dartboard",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Dartboard implemented as a vanilla web component",
-  "keywords": ["dartbot", "dartboard", "web component", "canvas"],
+  "keywords": [
+    "dartbot",
+    "dartboard",
+    "web component",
+    "canvas"
+  ],
   "homepage": "https://docs.dartbot.com/dartboard",
   "repository": {
     "type": "git",
@@ -11,7 +16,9 @@
   "license": "MIT",
   "author": "Stephen Marsh",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/lib/index.js",
   "module": "dist/src/index.js",
   "exports": {
@@ -67,7 +74,9 @@
     "typescript": "^5.5.3"
   },
   "customElements": "./dist/custom-elements.json",
-  "eslintIgnore": ["**/*.test.ts"],
+  "eslintIgnore": [
+    "**/*.test.ts"
+  ],
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
@@ -101,6 +110,5 @@
       "prettier --write"
     ]
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
