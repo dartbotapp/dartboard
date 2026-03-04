@@ -58,4 +58,14 @@ jobs:
         run: |
           npm config delete //registry.npmjs.org/:_authToken || true
           unset NODE_AUTH_TOKEN NPM_TOKEN
-      - run: npm publish --access public --provenance
+      - name: Publish to npm
+        env:
+          IS_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          if [[ "$IS_PRERELEASE" == "true" ]]; then
+            echo "Publishing prerelease to npm with dist-tag next"
+            npm publish --access public --provenance --tag next
+          else
+            echo "Publishing release to npm with dist-tag latest"
+            npm publish --access public --provenance
+          fi
