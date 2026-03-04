@@ -51,5 +51,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - run: npm i -g npm@10
       - run: npm ci
+      - name: Ensure no token auth is configured
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken || true
+          unset NODE_AUTH_TOKEN NPM_TOKEN
       - run: npm publish --access public --provenance

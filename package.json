@@ -1,6 +1,6 @@
 {
   "name": "@dartbot/dartboard",
-  "version": "0.6.0",
+  "version": "0.6.0-alpha.1",
   "description": "Dartboard implemented as a vanilla web component",
   "keywords": [
     "dartbot",
