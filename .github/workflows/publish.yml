@@ -38,7 +38,16 @@ jobs:
       - name: Sts GetCallerIdentity
         run: aws sts get-caller-identity
       - name: Deploy static site to S3 bucket
-        run: aws s3 cp ./storybook-static/ s3://${{secrets.AWS_DOCS_BUCKET}}/dartboard --recursive
+        env:
+          IS_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          if [[ "$IS_PRERELEASE" == "true" ]]; then
+            echo "Deploying prerelease docs to /test/dartboard"
+            aws s3 cp ./storybook-static/ s3://${{secrets.AWS_DOCS_BUCKET}}/test/dartboard --recursive
+          else
+            echo "Deploying release docs to /dartboard"
+            aws s3 cp ./storybook-static/ s3://${{secrets.AWS_DOCS_BUCKET}}/dartboard --recursive
+          fi
 
   publish-npm:
     needs: build

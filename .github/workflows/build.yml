@@ -14,29 +14,5 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - run: npm run build
       - run: npm test
-      - run: npm run storybook:build
-
-  publish-storybook:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run storybook:build
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE }}
-          role-session-name: session-deploy-segment
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Sts GetCallerIdentity
-        run: aws sts get-caller-identity
-      - name: Deploy static site to S3 bucket
-        run: aws s3 cp ./storybook-static/ s3://${{secrets.AWS_DOCS_BUCKET}}/test/dartboard --recursive
