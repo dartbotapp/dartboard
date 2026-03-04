@@ -3,7 +3,6 @@ on:
   release:
     types: [published]
 permissions:
-  id-token: write
   contents: read
 jobs:
   build:
@@ -20,12 +19,14 @@ jobs:
   publish-storybook:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: npm run storybook:build
       - name: Configure AWS Credentials
@@ -42,13 +43,29 @@ jobs:
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
+          node-version: 22
+      - run: npm i -g npm@11.5.1
+      - run: npm --version
       - run: npm ci
-      - run: npm publish --access=public
+      - name: Ensure no token auth is configured
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken || true
+          unset NODE_AUTH_TOKEN NPM_TOKEN
+      - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_ACCESS_KEY}}
+          IS_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          if [[ "$IS_PRERELEASE" == "true" ]]; then
+            echo "Publishing prerelease to npm with dist-tag next"
+            npm publish --access public --provenance --tag next
+          else
+            echo "Publishing release to npm with dist-tag latest"
+            npm publish --access public --provenance
+          fi
