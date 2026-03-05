@@ -2,6 +2,9 @@ name: Publish
 on:
   release:
     types: [published]
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
@@ -15,6 +18,18 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run storybook:build
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-artifact
+          path: dist
+          if-no-files-found: error
+      - name: Upload storybook artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-artifact
+          path: storybook-static
+          if-no-files-found: error
 
   publish-storybook:
     needs: build
@@ -23,12 +38,10 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/download-artifact@v4
         with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run storybook:build
+          name: storybook-artifact
+          path: storybook-static
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -57,10 +70,14 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-artifact
+          path: dist
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm ci
+      - run: npm i -g npm@11.5.1
       - name: Set package version from release tag
         env:
           TAG: ${{ github.event.release.tag_name }}
@@ -82,8 +99,8 @@ jobs:
         run: |
           if [[ "$IS_PRERELEASE" == "true" ]]; then
             echo "Publishing prerelease to npm with dist-tag next"
-            npm publish --access public --provenance --tag next
+            npm publish --ignore-scripts --access public --provenance --tag next
           else
             echo "Publishing release to npm with dist-tag latest"
-            npm publish --access public --provenance
+            npm publish --ignore-scripts --access public --provenance
           fi
