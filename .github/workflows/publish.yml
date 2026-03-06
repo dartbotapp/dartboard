@@ -46,6 +46,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm i -g npm@11.5.1
       - name: Set package version from release tag
         env:
           TAG: ${{ github.event.release.tag_name }}
@@ -56,7 +58,6 @@ jobs:
       - name: Ensure no token auth is configured
         run: |
           npm config delete //registry.npmjs.org/:_authToken || true
-          unset NODE_AUTH_TOKEN NPM_TOKEN
       - name: Publish to npm
         env:
           IS_PRERELEASE: ${{ github.event.release.prerelease }}
